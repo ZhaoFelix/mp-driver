@@ -1,5 +1,7 @@
 <template>
-  <div class="counter-warp"></div>
+  <div class="counter-warp">
+    <p></p>
+  </div>
 </template>
 
 <script>
