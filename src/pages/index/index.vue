@@ -1,13 +1,15 @@
 <template>
   <div>
-    <van-button type="primary">主要</van-button>
+    <van-button type="primary" :disabled="isClick > 1">主要</van-button>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    return {};
+    return {
+      isClick: 1,
+    };
   },
 };
 </script>
