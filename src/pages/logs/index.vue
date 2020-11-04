@@ -3,37 +3,96 @@
     <van-tabs :active="active" bind:change="onChange">
   <van-tab title="全部">
     <div>
-      <van-image
-            src="../../../static/images/leader.png"
-           width="100%"
-            height="1000"
-            fit="cover"
-            @click="articleDetail"
-          />
+      <div class="course-list">
+      <div v-for="i in 4" :key="i" class="course-card">
+        <div class="course-content" @click="courseDetail">
+          
+              <van-row >
+                <span class="course-map">｜｜｜订单编号：20201113-15</span>
+                <span class="course-map">未完成</span>
+             
+              </van-row>
+
+           <van-row> 
+              
+                <span class="course-name"> 订单地址：地区、街道 </span>
+           </van-row>
+          <van-row >
+            <span class="course-map">
+              上海市奉贤区奉浦大道123号
+            </span>
+          </van-row>
+          <van-row >
+            <span class="course-time">上海市奉贤区奉浦大道123号</span>
+            <span class="course-mapBottom">实际付款：450</span>
+          </van-row>
+        </div>
+      </div>
+    </div>
       </div>
   </van-tab>
   <van-tab title="已完成">
     <div>
-      <van-image
-            src="../../../static/images/leader.png"
-            width="70"
-            radius="35px"
-            height="70px"
-            fit="cover"
-            @click="articleDetail"
-          />
+       <div>
+      <div class="course-list">
+      <div v-for="i in 4" :key="i" class="course-card">
+        <div class="course-content" @click="courseDetail">
+          
+              <van-row >
+                <span class="course-map">｜｜｜订单编号：20201113-15</span>
+                <span class="course-map">未完成</span>
+             
+              </van-row>
+
+           <van-row> 
+              
+                <span class="course-name"> 订单地址：地区、街道 </span>
+           </van-row>
+          <van-row >
+            <span class="course-map">
+              上海市奉贤区奉浦大道123号
+            </span>
+          </van-row>
+          <van-row >
+            <span class="course-time">上海市奉贤区奉浦大道123号</span>
+            <span class="course-mapBottom">实际付款：450</span>
+          </van-row>
+        </div>
+      </div>
+    </div>
+      </div>
     </div>
   </van-tab>
   <van-tab title="已取消">
     <div>
-      <van-image
-            src="../../../static/images/leader.png"
-            width="70"
-            radius="35px"
-            height="70px"
-            fit="cover"
-            @click="articleDetail"
-          />
+       <div>
+      <div class="course-list">
+      <div v-for="i in 4" :key="i" class="course-card">
+        <div class="course-content" @click="courseDetail">
+          
+              <van-row >
+                <span class="course-map">｜｜｜订单编号：20201113-15</span>
+                <span class="course-map">未完成</span>
+             
+              </van-row>
+
+           <van-row> 
+              
+                <span class="course-name"> 订单地址：地区、街道 </span>
+           </van-row>
+          <van-row >
+            <span class="course-map">
+              上海市奉贤区奉浦大道123号
+            </span>
+          </van-row>
+          <van-row >
+            <span class="course-time">上海市奉贤区奉浦大道123号</span>
+            <span class="course-mapBottom">实际付款：450</span>
+          </van-row>
+        </div>
+      </div>
+    </div>
+      </div>
     </div>
   </van-tab>
 </van-tabs>
@@ -72,4 +131,49 @@ export default {
   background-color: rgba(0, 0, 0, 0.05);
 }
 
+.course-content {
+  padding: 20px;
+}
+.course-list {
+  width: 100%;
+  height: auto;
+}
+.course-name {
+  font-weight: bold;
+}
+.course-map {
+  width: 100%;
+  padding-right:100px;
+  font-size: 13px;
+  color: rgba(1, 1, 1, 0.5);
+}
+.course-mapBottom {
+  width: 100%;
+  padding-left:70px;
+  font-size: 13px;
+  color: rgba(1, 1, 1, 0.5);
+}
+.course-time {
+  width: 100%;
+  font-size: 13px;
+  background-color: rgba(206, 146, 50, 0.5);
+
+}
+
+.discount-price {
+  color: red;
+}
+.raw-price {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 13px;
+  margin-left: 10px;
+}
+.course-card {
+  box-shadow: 5px 5px 5px 5px rgba(0, 0, 0, 0.05);
+  margin: 5px 2% 5px 2%;
+  background-color: rgba(255, 255, 255, 0.883);
+  border-radius: 15px;
+  
+}
 </style>

@@ -13,7 +13,8 @@
         "van-tab": "vant-weapp/dist/tab/index",
         "van-tabs": "vant-weapp/dist/tabs/index",
         "van-image": "vant-weapp/dist/image/index",
-        "van-steps": "@vant/weapp/steps/index"
+        "van-cell": "vant-weapp/dist/cell/index"
+
     },
     "window": {
         "backgroundTextStyle": "light",

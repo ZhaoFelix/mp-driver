@@ -42,6 +42,16 @@
                 @click="articleDetail"
               />
             </van-col>
+            <van-col span="8">
+              <van-image
+                src="../../../static/images/leader.png"
+                width="100%"
+                radius="8px"
+                height="72px"
+                fit="cover"
+                @click="articleDetail"
+              />
+            </van-col>
             
            
           </van-row>
@@ -50,13 +60,12 @@
       </div>
     </div>
     <div class="info-table">
-      <van-cell
-        v-for="(item, index) in tableList"
-        :key="index"
-        is-link
-        :title="item.title"
-        :url="item.url"
-      />
+      <van-cell 
+  is-link
+  title="单元格"
+  link-type="navigateTo"
+  url="../../pages/index/index"
+/>
     </div>
     <div class="version-info">v 2.3.1</div>
   </div>
@@ -98,7 +107,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.05);
 }
 .user-info {
-  height: 70px;
+  height: 90px;
   width: 100%;
   margin-top: 15px;
   background-color: white;
