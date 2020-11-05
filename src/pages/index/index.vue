@@ -4,40 +4,27 @@
     <div class="course-list">
       <div v-for="i in 4" :key="i" class="course-card">
         <div class="course-content" @click="courseDetail">
-          <van-row class="card-top" gutter="10">
+          <van-row>
             <van-col span="8">
               <van-image
-                src="../../../static/images/leader.png"
-                width="100%"
+                src="../../../static/images/user.png"
+                width="60%"
                 radius="8px"
                 height="72px"
                 fit="cover"
                 @click="articleDetail"
               />
-            </van-col>
-            <van-col span="16">
-              <van-row>
-                <span class="course-name"> 垃圾倾倒 </span>
-              </van-row>
-              <van-row>
-                <span class="course-time">
-                  倾倒拍照
-                </span>
-              </van-row>
-              <van-row class="course-price" gutter="20">
-               
-                <van-col span="8">
-                  <span class="course-viewed"> 3/4 </span>
-                </van-col>
-              </van-row>
-            </van-col>
+             </van-col>
+  
+             <van-col span="16">
+               <span class="course-map">垃圾运输中</span>
+                 <van-row>      
+                  <span class="course-name"> 垃圾倾倒 、垃圾清理</span>
+                 </van-row>
+                  <span class="course-map">垃圾运输中</span>
+              </van-col>
           </van-row>
-          <van-row class="card-bottom">
-            <span>
-              垃圾处置地点：地址地址地址地址地址地址地址地址地址地址地址
-            </span>
-          </van-row>
-        </div>
+        </div>  
       </div>
     </div>
     <div style="height: 5px; width: 100%"></div>
@@ -86,7 +73,6 @@ export default {
 .img {
   position: absolute;
   width: 100%;
-  
 }
 .title {
   padding: 0px 0px 10px 2%;
@@ -95,9 +81,14 @@ export default {
   font-size: 15px;
   font-weight: bold;
 }
+.divider {
+  width: 100%;
+  height: 8px;
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
 .course-content {
-  padding: 10px;
+  padding: 20px;
 }
 .course-list {
   width: 100%;
@@ -106,9 +97,22 @@ export default {
 .course-name {
   font-weight: bold;
 }
-.course-time {
+.course-map {
+  width: 100%;
+  padding-right: 100px;
   font-size: 13px;
   color: rgba(1, 1, 1, 0.5);
+}
+.course-mapBottom {
+  width: 100%;
+  padding-left: 70px;
+  font-size: 13px;
+  color: rgba(1, 1, 1, 0.5);
+}
+.course-time {
+  width: 100%;
+  font-size: 13px;
+  background-color: rgba(206, 146, 50, 0.5);
 }
 
 .discount-price {
@@ -121,25 +125,7 @@ export default {
   margin-left: 10px;
 }
 .course-card {
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.05);
-  margin: 5px 2% 5px 2%;
-  background-color: white;
-  border-radius: 10px;
-}
-.course-viewed {
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 11px;
-  text-align: right;
-}
-.card-bottom span {
-  color: rgba(0, 0, 0, 0.5);
-  font-size: 13px;
-}
-.service {
-  position: fixed;
-  width: 80px;
-  height: 60px;
-  bottom: 10px;
-  right: 10px;
+  background-color: rgba(255, 255, 255, 0.883);
+  border-radius: 15px;
 }
 </style>

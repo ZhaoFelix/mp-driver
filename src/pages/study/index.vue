@@ -24,7 +24,7 @@
           <van-row class="card-top" gutter="10">
             <van-col span="8">
               <van-image
-                src="../../../static/images/leader.png"
+                src="../../../static/images/user.png"
                 width="100%"
                 radius="8px"
                 height="72px"
@@ -34,7 +34,7 @@
             </van-col>
             <van-col span="8">
               <van-image
-                src="../../../static/images/leader.png"
+                src="../../../static/images/user.png"
                 width="100%"
                 radius="8px"
                 height="72px"
@@ -44,7 +44,7 @@
             </van-col>
             <van-col span="8">
               <van-image
-                src="../../../static/images/leader.png"
+                src="../../../static/images/user.png"
                 width="100%"
                 radius="8px"
                 height="72px"
