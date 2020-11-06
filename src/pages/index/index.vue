@@ -2,13 +2,21 @@
   <div class="main-container">
     
     <div class="course-list">
-      <div v-for="i in 4" :key="i" class="course-card">
+      <div v-for="i in 5" :key="i" class="course-card">
         <div class="course-content" @click="courseDetail">
           <van-row>
-            <van-col span="8">
-              <van-image
+            <van-col span="7">
+            <van-row>
+              <span class="course-yearTime">20-11-09</span>
+              </van-row>
+              <van-row>
+              <span class="course-time">14:34:24</span>
+              </van-row>
+             </van-col>
+             <van-col span="1">
+             <van-image
                 src="../../../static/images/user.png"
-                width="60%"
+                width="30%"
                 radius="8px"
                 height="72px"
                 fit="cover"
@@ -17,9 +25,16 @@
              </van-col>
   
              <van-col span="16">
+               <van-col span="17">
                <span class="course-map">垃圾运输中</span>
+               </van-col>
+               <van-col>
+               <span class="course-pushBut">提交订单</span>
+               </van-col>
                  <van-row>      
-                  <span class="course-name"> 垃圾倾倒 、垃圾清理</span>
+                    <van-uploader >
+                      <van-button icon="photo" type="primary" class="upImage">上传图片</van-button>
+                   </van-uploader>
                  </van-row>
                   <span class="course-map">垃圾运输中</span>
               </van-col>
@@ -99,7 +114,7 @@ export default {
 }
 .course-map {
   width: 100%;
-  padding-right: 100px;
+ 
   font-size: 13px;
   color: rgba(1, 1, 1, 0.5);
 }
@@ -111,10 +126,20 @@ export default {
 }
 .course-time {
   width: 100%;
-  font-size: 13px;
-  background-color: rgba(206, 146, 50, 0.5);
+  font-size: 10px;
 }
+.course-yearTime {
+  width: 100%;
+  font-size: 14px;
+}
+.course-pushBut {
+  padding: 4px;
+  
+  color: aliceblue;
+  font-size: 12px;
+  background-color: goldenrod;
 
+}
 .discount-price {
   color: red;
 }
@@ -127,5 +152,9 @@ export default {
 .course-card {
   background-color: rgba(255, 255, 255, 0.883);
   border-radius: 15px;
+}
+.upImage {
+ background-color: cornsilk;
+ width: 5%;
 }
 </style>
