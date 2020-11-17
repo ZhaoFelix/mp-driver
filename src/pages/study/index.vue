@@ -16,59 +16,78 @@
           <div class="user-nickname">老司机</div>
           <div class="wechat">手机号</div>
         </van-col>
+        
       </van-row>
     </div>
-     <div class="course-list">
-      <div  class="course-card">
-        <div class="course-content" @click="courseDetail">
-          <van-row class="card-top" gutter="10">
-            <van-col span="8">
-              <van-image
-                src="../../../static/images/user.png"
-                width="100%"
-                radius="8px"
-                height="72px"
-                fit="cover"
-                @click="articleDetail"
-              />
-            </van-col>
-            <van-col span="8">
-              <van-image
-                src="../../../static/images/user.png"
-                width="100%"
-                radius="8px"
-                height="72px"
-                fit="cover"
-                @click="articleDetail"
-              />
-            </van-col>
-            <van-col span="8">
-              <van-image
-                src="../../../static/images/user.png"
-                width="100%"
-                radius="8px"
-                height="72px"
-                fit="cover"
-                @click="articleDetail"
-              />
-            </van-col>
-            
-           
-          </van-row>
+    <div class="user-identer">
+       
+       <can-col span="14">
          
-        </div>
-      </div>
+         </can-col>
+      <van-row>
+      <van-col  span="14">
+         <span class="course-toptext">详细信息</span>
+         
+       </van-col>
+      
+        <van-col span="14">
+          <van-col span="14">
+         <span class="course-map">司机姓名：周师傅</span>
+        </van-col>
+        <van-col span="14">
+         <span class="course-map">牌照：沪Advaw3</span>
+        </van-col>
+        <van-col span="14">
+        <span class="course-map">车辆型号：P64Gk</span>
+        </van-col>
+        <van-col span="14">
+            <span class="course-map">车辆承重：30KG </span>
+        </van-col>
+        <van-col span="14">
+        <span class="course-map">车辆尺寸：</span>
+        </van-col>
+        </van-col>
+       
+        <van-col offset="1" span="6">
+          <van-image
+            src="../../../static/images/user.png"
+            width="70"
+            radius="35px"
+            height="70px"
+            fit="cover"
+            @click="articleDetail"
+          />
+        </van-col>
+      
+        
+      </van-row>
+    </div>
+  
+    <div class="info-table">
+      <van-cell 
+  is-link
+  title="服务协议"
+  link-type="navigateTo"
+  url="../../pages/index/index"/>
     </div>
     <div class="info-table">
       <van-cell 
   is-link
-  title="单元格"
+  title="意见反馈"
   link-type="navigateTo"
-  url="../../pages/index/index"
-/>
+  url="../../pages/index/index"/>
     </div>
+    <div class="info-table">
+      <van-cell 
+  is-link
+  title="联系客服"
+  link-type="navigateTo"
+  url="../../pages/index/index"/>
+    </div>
+    
     <div class="version-info">v 2.3.1</div>
   </div>
+  
 </template>
 
 <script>
@@ -112,6 +131,12 @@ export default {
   margin-top: 15px;
   background-color: white;
 }
+.user-identer {
+  height: 170px;
+  width: 100%;
+  margin-top: 15px;
+  background-color: white;
+}
 .user-nickname {
   margin-top: 5px;
   height: 30px;
@@ -124,7 +149,7 @@ export default {
   color: rgba(1, 1, 1, 0.6);
 }
 .info-table {
-  margin-top: 15px;
+  margin-top: 5px;
 }
 
 .version-info {
@@ -198,5 +223,23 @@ export default {
   height: 60px;
   bottom: 10px;
   right: 10px;
+}
+.course-map {
+  width: 100%;
+ margin-left: 10%;
+  font-size: 13px;
+  margin-top: -5%;
+  color: rgba(1, 1, 1, 0.5);
+}
+.course-toptext {
+  width: 100%;
+  margin-left: 5%;
+  font-size: 18px;
+  color: rgba(1, 1, 1, 0.5);
+}
+.course-line {
+  margin: 0%;
+  padding: 0%;
+
 }
 </style>

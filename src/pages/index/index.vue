@@ -22,6 +22,7 @@
                 fit="cover"
                 @click="articleDetail"
               />
+              
              </van-col>
   
              <van-col span="16">
@@ -33,7 +34,16 @@
                </van-col>
                  <van-row>      
                     <van-uploader >
-                      <van-button icon="photo" type="primary" class="upImage">上传图片</van-button>
+                      <van-button icon="photo" type="primary" custom-class="upImage"></van-button>
+                   </van-uploader>
+                   <van-uploader >
+                      <van-button icon="photo" type="primary" custom-class="upImage"></van-button>
+                   </van-uploader>
+                   <van-uploader >
+                      <van-button icon="photo" type="primary" custom-class="upImage"></van-button>
+                   </van-uploader>
+                   <van-uploader >
+                      <van-button icon="photo" type="primary" custom-class="upImage"></van-button>
                    </van-uploader>
                  </van-row>
                   <span class="course-map">垃圾运输中</span>
@@ -73,6 +83,7 @@ export default {
     // let app = getApp()
   },
 };
+
 </script>
 
 <style scoped>
@@ -153,8 +164,11 @@ export default {
   background-color: rgba(255, 255, 255, 0.883);
   border-radius: 15px;
 }
-.upImage {
- background-color: cornsilk;
- width: 5%;
+>>>.upImage {
+ background-color: gainsboro;
+ border-color: white;
+ width: 50px;
+ margin-right: 5px;
+ margin-top: 7px;
 }
 </style>
