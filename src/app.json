@@ -5,6 +5,7 @@
         "pages/counter/main",
         "pages/study/main"
 
+
     ],
     "usingComponents": {
         "van-button": "vant-weapp/dist/button/index",
@@ -14,7 +15,8 @@
         "van-tabs": "vant-weapp/dist/tabs/index",
         "van-image": "vant-weapp/dist/image/index",
         "van-cell": "vant-weapp/dist/cell/index",
-        "van-uploader": "vant-weapp/dist/uploader/index"
+        "van-uploader": "vant-weapp/dist/uploader/index",
+        "van-dialog": "vant-weapp/dist/dialog/index"
 
     },
     "window": {

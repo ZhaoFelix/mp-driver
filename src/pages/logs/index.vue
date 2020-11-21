@@ -10,11 +10,8 @@
               <van-row >
                 <span class="course-map">｜｜｜订单编号：20201113-15</span>
                 <span class="course-map">未完成</span>
-             
               </van-row>
-
            <van-row> 
-              
                 <span class="course-name"> 订单地址：地区、街道 </span>
            </van-row>
           <van-row >
@@ -72,7 +69,7 @@
           
               <van-row >
                 <span class="course-map">｜｜｜订单编号：20201113-15</span>
-                <span class="course-map">未完成</span>
+                <span class="course-map">已取消</span>
              
               </van-row>
 
@@ -80,15 +77,19 @@
               
                 <span class="course-name"> 订单地址：地区、街道 </span>
            </van-row>
-          <van-row >
-            <span class="course-map">
+          <van-row  >
+            <van-col class="course-map">
               上海市奉贤区奉浦大道123号
-            </span>
+            </van-col>
+            <van-col class="course-time">取消日期2020年11月20</van-col>
+                <van-col class="course-backGroudColor">
+                <van-row><span class="course-mapBottom"> 取消原因</span></van-row>
+                <van-row><span class="course-mapBottom">调度员后台操作</span></van-row>
+            </van-col>
+            
           </van-row>
-          <van-row >
-            <span class="course-time">上海市奉贤区奉浦大道123号</span>
-            <span class="course-mapBottom">实际付款：450</span>
-          </van-row>
+          
+          
         </div>
       </div>
     </div>
@@ -175,5 +176,11 @@ export default {
   background-color: rgba(255, 255, 255, 0.883);
   border-radius: 15px;
   
+}
+.course-backGroudColor{
+  
+  height: 100%;
+  width: 100%;
+  background-color: #f3f3f346;
 }
 </style>

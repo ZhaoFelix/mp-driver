@@ -105,7 +105,7 @@
                 <div style="height: 2px; width: 100%"></div>
                 <div class="course-bottomcolorline">
                  <van-col class="course-orderinformation" span="16">联系人</van-col>
-                 <van-col class="course-ordermap" sapn="16">李二狗<span class="course-ordermap">电话；联系：176****0276</span></span></van-col>
+                 <van-col class="course-ordermap" sapn="16">李二狗<span class="course-ordermap">电话；联系：176****0276</span></van-col>
                  </div>
                 </div>
                 </van-col>
@@ -239,7 +239,7 @@ export default {
   background-color: rgba(255, 255, 255, 0.883);
   border-radius: 15px;
 }
->>> .upImage {
+ >>>.upImage {
   background-color: gainsboro;
   border-color: white;
   width: 50px;
