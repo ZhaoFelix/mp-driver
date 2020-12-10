@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-10 20:47:21
+ * @LastEditTime: 2020-12-10 21:21:31
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -15,11 +15,11 @@
         <span style="color: rgba(1, 1, 1, 0.7)">5678203948756543456</span>
       </div>
       <!-- 垃圾倾倒 -->
-      <div v-for="i in 4" :key="i" class="step-6">
+      <div class="step-6">
         <!-- top -->
         <van-row>
           <!-- left -->
-          <van-col span="6">
+          <van-col span="4">
             <van-row>
               <div class="step-common">2020/11/11 14:32:23</div>
             </van-row>
@@ -37,7 +37,7 @@
             </van-row>
           </van-col>
           <!-- right -->
-          <van-col offset="1" span="16">
+          <van-col offset="1" span="18">
             <van-row>
               <van-row>
                 <van-col>
@@ -69,7 +69,7 @@
                         <van-uploader
                           :file-list="fileList"
                           max-count="4"
-                          preview-size="45"
+                          preview-size="55"
                           :deletable="false"
                         />
                       </van-col>
@@ -83,7 +83,139 @@
       </div>
       <!-- 垃圾运输 -->
       <!-- 垃圾装车 -->
+      <div class="step-6">
+        <!-- top -->
+        <van-row>
+          <!-- left -->
+          <van-col span="4">
+            <van-row>
+              <div class="step-common">2020/11/11 14:32:23</div>
+            </van-row>
+            <van-row>
+              <div>&nbsp;</div>
+            </van-row>
+          </van-col>
+          <!-- medium -->
+          <van-col span="1">
+            <van-row>
+              <img src="../../../static/images/user.png" class="step-icon" />
+            </van-row>
+            <van-row>
+              <div class="v-divider">&nbsp;</div>
+            </van-row>
+          </van-col>
+          <!-- right -->
+          <van-col offset="1" span="18">
+            <van-row>
+              <van-row>
+                <van-col>
+                  <van-row>
+                    <van-col>
+                      <div class="step-common-title">垃圾倾倒</div>
+                    </van-col>
+                    <van-col>
+                      <button class="step-common-btn">完成订单</button>
+                    </van-col>
+                  </van-row>
+                </van-col>
+              </van-row>
+              <!-- bottom -->
+              <van-row>
+                <van-col>
+                  <div class="step-6-imgs">
+                    <van-row>
+                      <van-col span="12">
+                        <div class="limit-common limit-tip">倾倒拍照：</div>
+                      </van-col>
+                      <van-col offset="8" span="4">
+                        <div class="limit-common limit-number">2/4</div>
+                      </van-col>
+                    </van-row>
+                    <van-row>
+                      <van-col>
+                        <div style="height: 8px"></div>
+                        <van-uploader
+                          :file-list="fileList"
+                          max-count="4"
+                          preview-size="55"
+                          :deletable="false"
+                        />
+                      </van-col>
+                    </van-row>
+                  </div>
+                </van-col>
+              </van-row>
+            </van-row>
+          </van-col>
+        </van-row>
+      </div>
       <!-- 垃圾清算 -->
+      <div class="step-6">
+        <!-- top -->
+        <van-row>
+          <!-- left -->
+          <van-col span="4">
+            <van-row>
+              <div class="step-common">2020/11/11 14:32:23</div>
+            </van-row>
+            <van-row>
+              <div>&nbsp;</div>
+            </van-row>
+          </van-col>
+          <!-- medium -->
+          <van-col span="1">
+            <van-row>
+              <img src="../../../static/images/user.png" class="step-icon" />
+            </van-row>
+            <van-row>
+              <div class="v-divider">&nbsp;</div>
+            </van-row>
+          </van-col>
+          <!-- right -->
+          <van-col offset="1" span="18">
+            <van-row>
+              <van-row>
+                <van-col>
+                  <van-row>
+                    <van-col>
+                      <div class="step-common-title">垃圾倾倒</div>
+                    </van-col>
+                    <van-col>
+                      <button class="step-common-btn">完成订单</button>
+                    </van-col>
+                  </van-row>
+                </van-col>
+              </van-row>
+              <!-- bottom -->
+              <van-row>
+                <van-col>
+                  <div class="step-6-imgs">
+                    <van-row>
+                      <van-col span="12">
+                        <div class="limit-common limit-tip">倾倒拍照：</div>
+                      </van-col>
+                      <van-col offset="8" span="4">
+                        <div class="limit-common limit-number">2/4</div>
+                      </van-col>
+                    </van-row>
+                    <van-row>
+                      <van-col span="24">
+                        <div style="height: 8px"></div>
+                        <van-uploader
+                          :file-list="fileList"
+                          max-count="4"
+                          preview-size="55"
+                          :deletable="false"
+                        />
+                      </van-col>
+                    </van-row>
+                  </div>
+                </van-col>
+              </van-row>
+            </van-row>
+          </van-col>
+        </van-row>
+      </div>
       <!-- 前往目的地 -->
       <!-- 订单信息 -->
     </div>
@@ -97,14 +229,6 @@ export default {
   data() {
     return {
       fileList: [
-        {
-          url: "https://img.yzcdn.cn/vant/leaf.jpg",
-          name: "图片1",
-        },
-        {
-          url: "https://img.yzcdn.cn/vant/leaf.jpg",
-          name: "图片1",
-        },
         {
           url: "https://img.yzcdn.cn/vant/leaf.jpg",
           name: "图片1",
@@ -181,6 +305,7 @@ export default {
   background-color: rgba(0, 0, 0, 0.01);
   padding: 8px;
   border-radius: 8px;
+  width: 100%;
 }
 
 .limit-common {
