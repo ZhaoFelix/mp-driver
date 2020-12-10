@@ -4,8 +4,6 @@
         "pages/logs/main",
         "pages/counter/main",
         "pages/study/main"
-
-
     ],
     "usingComponents": {
         "van-button": "vant-weapp/dist/button/index",
@@ -17,7 +15,6 @@
         "van-cell": "vant-weapp/dist/cell/index",
         "van-uploader": "vant-weapp/dist/uploader/index",
         "van-dialog": "vant-weapp/dist/dialog/index"
-
     },
     "window": {
         "backgroundTextStyle": "light",
