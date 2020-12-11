@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-11 09:11:03
+ * @LastEditTime: 2020-12-11 09:19:47
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -394,124 +394,10 @@
 </template>
 
 <script>
-import card from "@/components/card";
-
-export default {
-  data() {
-    return {
-      fileList: [
-        {
-          url: "https://img.yzcdn.cn/vant/leaf.jpg",
-          name: "图片1",
-        },
-        {
-          url: "https://img.yzcdn.cn/vant/leaf.jpg",
-          name: "图片1",
-        },
-        {
-          url: "https://img.yzcdn.cn/vant/leaf.jpg",
-          name: "图片1",
-        },
-        {
-          url: "https://img.yzcdn.cn/vant/leaf.jpg",
-          name: "图片1",
-        },
-      ],
-      maxCount: 4,
-    };
-  },
-
-  components: {
-    card,
-  },
-
-  methods: {
-    articleDetail() {},
-    courseDetail() {},
-  },
-
-  created() {
-    // let app = getApp()
-  },
-};
+import ongoing from "./ongoing.js";
+export default ongoing;
 </script>
 
 <style scoped>
-.main-container {
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.01);
-  position: absolute;
-}
-.sub-container {
-  width: 96%;
-  background-color: white;
-  position: absolute;
-  margin: 8px 2% 0 8px;
-  border-radius: 20px;
-}
-
-.order-number {
-  font-size: 12px;
-  background-color: rgba(0, 0, 0, 0.01);
-  color: rgba(1, 1, 1, 0.5);
-  padding: 6px 10px;
-}
-
-.step-common {
-  font-size: 12px;
-  text-align: center;
-}
-.step-icon {
-  width: 30px;
-  height: 30px;
-}
-.step-common-title {
-  height: 30px;
-  line-height: 30px;
-  margin-left: 4px;
-  color: rgba(1, 1, 1, 0.8);
-  font-size: 14px;
-}
-.step-common-btn {
-  margin-top: 4px;
-  position: absolute;
-  right: 10px;
-  height: 22px;
-  width: 80px;
-  font-size: 10px;
-}
-.step-6-imgs {
-  background-color: rgba(0, 0, 0, 0.01);
-  padding: 8px;
-  border-radius: 8px;
-  width: 100%;
-}
-
-.limit-common {
-  color: rgba(1, 1, 1, 0.5);
-  font-size: 12px;
-}
-.limit-number {
-  text-align: right;
-}
-
-.v-divider {
-  background-color: rgba(0, 0, 0, 0.01);
-  width: 2px;
-  float: right;
-  height: 90px;
-}
-.v-divider-1 {
-  background-color: rgba(0, 0, 0, 0.01);
-  width: 2px;
-  float: right;
-  height: 30px;
-}
-.v-divider-2 {
-  background-color: rgba(0, 0, 0, 0.01);
-  width: 2px;
-  float: right;
-  height: 115px;
-}
+@import url("./index.css");
 </style>
