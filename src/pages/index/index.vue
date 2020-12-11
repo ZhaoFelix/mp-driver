@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-10 21:21:31
+ * @LastEditTime: 2020-12-11 08:15:36
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -60,7 +60,9 @@
                         <div class="limit-common limit-tip">倾倒拍照：</div>
                       </van-col>
                       <van-col offset="8" span="4">
-                        <div class="limit-common limit-number">2/4</div>
+                        <div class="limit-common limit-number">
+                          {{ fileList.length + "/" + maxCount }}
+                        </div>
                       </van-col>
                     </van-row>
                     <van-row>
@@ -68,7 +70,7 @@
                         <div style="height: 8px"></div>
                         <van-uploader
                           :file-list="fileList"
-                          max-count="4"
+                          :max-count="maxCount"
                           preview-size="55"
                           :deletable="false"
                         />
@@ -128,7 +130,9 @@
                         <div class="limit-common limit-tip">倾倒拍照：</div>
                       </van-col>
                       <van-col offset="8" span="4">
-                        <div class="limit-common limit-number">2/4</div>
+                        <div class="limit-common limit-number">
+                          {{ fileList.length + "/" + maxCount }}
+                        </div>
                       </van-col>
                     </van-row>
                     <van-row>
@@ -136,7 +140,7 @@
                         <div style="height: 8px"></div>
                         <van-uploader
                           :file-list="fileList"
-                          max-count="4"
+                          :max-count="maxCount"
                           preview-size="55"
                           :deletable="false"
                         />
@@ -195,7 +199,9 @@
                         <div class="limit-common limit-tip">倾倒拍照：</div>
                       </van-col>
                       <van-col offset="8" span="4">
-                        <div class="limit-common limit-number">2/4</div>
+                        <div class="limit-common limit-number">
+                          {{ fileList.length + "/" + maxCount }}
+                        </div>
                       </van-col>
                     </van-row>
                     <van-row>
@@ -203,7 +209,7 @@
                         <div style="height: 8px"></div>
                         <van-uploader
                           :file-list="fileList"
-                          max-count="4"
+                          :max-count="maxCount"
                           preview-size="55"
                           :deletable="false"
                         />
@@ -237,7 +243,16 @@ export default {
           url: "https://img.yzcdn.cn/vant/leaf.jpg",
           name: "图片1",
         },
+        {
+          url: "https://img.yzcdn.cn/vant/leaf.jpg",
+          name: "图片1",
+        },
+        {
+          url: "https://img.yzcdn.cn/vant/leaf.jpg",
+          name: "图片1",
+        },
       ],
+      maxCount: 4,
     };
   },
 
