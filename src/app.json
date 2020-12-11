@@ -1,9 +1,8 @@
 {
     "pages": [
         "pages/index/main",
-        "pages/logs/main",
-        "pages/counter/main",
-        "pages/study/main"
+        "pages/order/main",
+        "pages/mine/main"
     ],
     "usingComponents": {
         "van-button": "vant-weapp/dist/button/index",
@@ -35,12 +34,12 @@
             "selectedIconPath": "static/tabs/home-active.png"
         }, {
             "text": "订单",
-            "pagePath": "pages/logs/main",
+            "pagePath": "pages/order/main",
             "iconPath": "static/tabs/orders.png",
             "selectedIconPath": "static/tabs/orders-active.png"
         }, {
             "text": "个人",
-            "pagePath": "pages/study/main",
+            "pagePath": "pages/mine/main",
             "iconPath": "static/tabs/home.png",
             "selectedIconPath": "static/tabs/home-active.png"
         }],
@@ -52,12 +51,12 @@
             "activeIcon": "static/tabs/home-active.png"
         }, {
             "name": "订单",
-            "pagePath": "pages/logs/main",
+            "pagePath": "pages/order/main",
             "icon": "static/tabs/orders.png",
             "activeIcon": "static/tabs/orders-active.png"
         }, {
             "text": "个人",
-            "pagePath": "pages/study/main",
+            "pagePath": "pages/mine/main",
             "iconPath": "static/tabs/home.png",
             "selectedIconPath": "static/tabs/home-active.png"
         }],
