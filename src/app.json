@@ -23,25 +23,25 @@
     },
     "tabBar": {
         "color": "#999",
-        "backgroundColor": "#fafafa",
-        "selectedColor": "#333",
+        "backgroundColor": "#ffffff",
+        "selectedColor": "#C29A77",
         "borderStyle": "white",
 
         "list": [{
             "text": "实时",
             "pagePath": "pages/index/main",
-            "iconPath": "static/tabs/home.png",
-            "selectedIconPath": "static/tabs/home-active.png"
+            "iconPath": "static/tabs/index.png",
+            "selectedIconPath": "static/tabs/index_selected.png"
         }, {
             "text": "订单",
             "pagePath": "pages/order/main",
-            "iconPath": "static/tabs/orders.png",
-            "selectedIconPath": "static/tabs/orders-active.png"
+            "iconPath": "static/tabs/order.png",
+            "selectedIconPath": "static/tabs/order_selected.png"
         }, {
             "text": "个人",
             "pagePath": "pages/mine/main",
-            "iconPath": "static/tabs/home.png",
-            "selectedIconPath": "static/tabs/home-active.png"
+            "iconPath": "static/tabs/mine.png",
+            "selectedIconPath": "static/tabs/mine_selected.png"
         }],
 
         "items": [{
