@@ -93,3 +93,16 @@ page {
   float: right;
   height: 115px;
 }
+.no-login {
+  margin-top: 70%;
+  color: rgba(0, 0, 0, 0.5);
+  text-align: center;
+  font-size: 14px;
+}
+.login-btn {
+  width: 40%;
+  margin-top: 20px;
+  height: 5%;
+  background-color: #d49968;
+  color: white;
+}
