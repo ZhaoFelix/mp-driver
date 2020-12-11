@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-11 09:19:47
+ * @LastEditTime: 2020-12-11 09:38:57
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -151,10 +151,10 @@
                 <van-col>
                   <van-row>
                     <van-col>
-                      <div class="step-common-title">垃圾装车</div>
+                      <div class="step-common-title">渣土装车</div>
                     </van-col>
                     <van-col>
-                      <button class="step-common-btn">完成订单</button>
+                      <button class="step-common-btn">完成装车</button>
                     </van-col>
                   </van-row>
                 </van-col>
@@ -220,11 +220,11 @@
                 <van-col>
                   <van-row>
                     <van-col>
-                      <div class="step-common-title">垃圾清算</div>
+                      <div class="step-common-title">渣土清算</div>
                       <div class="limit-common">装修面积：60平方米</div>
                     </van-col>
                     <van-col>
-                      <button class="step-common-btn">完成订单</button>
+                      <button class="step-common-btn">完成清算</button>
                     </van-col>
                   </van-row>
                 </van-col>
@@ -354,7 +354,7 @@
                 <van-col>
                   <van-row>
                     <van-col>
-                      <div class="step-common-title">已接单</div>
+                      <div class="step-common-title">已派单</div>
                     </van-col>
                     <van-col>
                       <button class="step-common-btn">立即出发</button>

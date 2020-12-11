@@ -39,8 +39,12 @@
   position: absolute;
   right: 10px;
   height: 22px;
+  line-height: 22px;
   width: 80px;
   font-size: 10px;
+  background-color: #d49968;
+  color: white;
+  border: 0;
 }
 .step-6-imgs {
   background-color: rgba(0, 0, 0, 0.01);
