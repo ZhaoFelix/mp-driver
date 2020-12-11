@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-11 09:38:57
+ * @LastEditTime: 2020-12-11 14:01:40
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -19,9 +19,10 @@
         <!-- top -->
         <van-row>
           <!-- left -->
-          <van-col span="4">
+          <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11 14:32:23</div>
+              <div class="step-common">2020/11/11</div>
+              <div class="step-common-1">14:32:23</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -30,14 +31,16 @@
           <!-- medium -->
           <van-col span="1">
             <van-row>
-              <img src="../../../static/images/user.png" class="step-icon" />
+              <div>
+                <img src="../../../static/images/6.png" class="step-icon-1" />
+              </div>
             </van-row>
             <van-row>
               <div class="v-divider">&nbsp;</div>
             </van-row>
           </van-col>
           <!-- right -->
-          <van-col offset="1" span="18">
+          <van-col offset="1" span="17">
             <van-row>
               <van-row>
                 <van-col>
@@ -88,9 +91,10 @@
         <!-- top -->
         <van-row>
           <!-- left -->
-          <van-col span="4">
+          <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11 14:32:23</div>
+              <div class="step-common">2020/11/11</div>
+              <div class="step-common-1">14:32:23</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -99,14 +103,16 @@
           <!-- medium -->
           <van-col span="1">
             <van-row>
-              <img src="../../../static/images/user.png" class="step-icon" />
+              <div class="step-icon-1">
+                <img src="../../../static/images/5.png" class="step-icon" />
+              </div>
             </van-row>
             <van-row>
               <div class="v-divider-1">&nbsp;</div>
             </van-row>
           </van-col>
           <!-- right -->
-          <van-col offset="1" span="18">
+          <van-col offset="1" span="17">
             <van-row>
               <van-col>
                 <div class="step-common-title">垃圾运输中</div>
@@ -127,9 +133,10 @@
         <!-- top -->
         <van-row>
           <!-- left -->
-          <van-col span="4">
+          <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11 14:32:23</div>
+              <div class="step-common">2020/11/11</div>
+              <div class="step-common-1">14:32:23</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -138,14 +145,16 @@
           <!-- medium -->
           <van-col span="1">
             <van-row>
-              <img src="../../../static/images/user.png" class="step-icon" />
+              <div class="step-icon-1">
+                <img src="../../../static/images/4.png" class="step-icon" />
+              </div>
             </van-row>
             <van-row>
               <div class="v-divider">&nbsp;</div>
             </van-row>
           </van-col>
           <!-- right -->
-          <van-col offset="1" span="18">
+          <van-col offset="1" span="17">
             <van-row>
               <van-row>
                 <van-col>
@@ -196,9 +205,10 @@
         <!-- top -->
         <van-row>
           <!-- left -->
-          <van-col span="4">
+          <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11 14:32:23</div>
+              <div class="step-common">2020/11/11</div>
+              <div class="step-common-1">14:32:23</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -207,14 +217,16 @@
           <!-- medium -->
           <van-col span="1">
             <van-row>
-              <img src="../../../static/images/user.png" class="step-icon" />
+              <div class="step-icon-1">
+                <img src="../../../static/images/3.png" class="step-icon" />
+              </div>
             </van-row>
             <van-row>
               <div class="v-divider-2">&nbsp;</div>
             </van-row>
           </van-col>
           <!-- right -->
-          <van-col offset="1" span="18">
+          <van-col offset="1" span="17">
             <van-row>
               <van-row>
                 <van-col>
@@ -266,9 +278,10 @@
         <!-- top -->
         <van-row>
           <!-- left -->
-          <van-col span="4">
+          <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11 14:32:23</div>
+              <div class="step-common">2020/11/11</div>
+              <div class="step-common-1">14:32:23</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -277,14 +290,16 @@
           <!-- medium -->
           <van-col span="1">
             <van-row>
-              <img src="../../../static/images/user.png" class="step-icon" />
+              <div class="step-icon-1">
+                <img src="../../../static/images/2.png" class="step-icon" />
+              </div>
             </van-row>
             <van-row>
               <div class="v-divider-2">&nbsp;</div>
             </van-row>
           </van-col>
           <!-- right -->
-          <van-col offset="1" span="18">
+          <van-col offset="1" span="17">
             <van-row>
               <van-row>
                 <van-col>
@@ -308,7 +323,7 @@
                       <div class="step-common-title">联系人</div>
                       <div class="limit-common">
                         <van-row>
-                          <van-col span="4">
+                          <van-col span="5">
                             <span>赵庆飞</span>
                           </van-col>
                           <van-col offset="2">
@@ -330,9 +345,10 @@
         <!-- top -->
         <van-row>
           <!-- left -->
-          <van-col span="4">
+          <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11 14:32:23</div>
+              <div class="step-common">2020/11/11</div>
+              <div class="step-common-1">14:32:23</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -341,14 +357,16 @@
           <!-- medium -->
           <van-col span="1">
             <van-row>
-              <img src="../../../static/images/user.png" class="step-icon" />
+              <div class="step-icon-1">
+                <img src="../../../static/images/1.png" class="step-icon" />
+              </div>
             </van-row>
             <van-row>
               <div class="v-divider-2">&nbsp;</div>
             </van-row>
           </van-col>
           <!-- right -->
-          <van-col offset="1" span="18">
+          <van-col offset="1" span="17">
             <van-row>
               <van-row>
                 <van-col>
@@ -372,11 +390,11 @@
                       <div class="step-common-title">建筑面积</div>
                       <div class="limit-common">
                         <van-row>
-                          <van-col span="6">
+                          <van-col span="7">
                             <span>120平方米</span>
                           </van-col>
-                          <van-col offset="2">
-                            <span>预约时间：</span>
+                          <van-col>
+                            <span>&nbsp;预约时间：</span>
                             <span style="color: red">2020-12-12 13:10</span>
                           </van-col>
                         </van-row>
