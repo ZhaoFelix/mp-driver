@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-11 08:15:36
+ * @LastEditTime: 2020-12-11 09:11:03
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -53,7 +53,7 @@
               </van-row>
               <!-- bottom -->
               <van-row>
-                <van-col>
+                <van-col span="22">
                   <div class="step-6-imgs">
                     <van-row>
                       <van-col span="12">
@@ -71,7 +71,7 @@
                         <van-uploader
                           :file-list="fileList"
                           :max-count="maxCount"
-                          preview-size="55"
+                          preview-size="50"
                           :deletable="false"
                         />
                       </van-col>
@@ -84,6 +84,44 @@
         </van-row>
       </div>
       <!-- 垃圾运输 -->
+      <div class="step-6">
+        <!-- top -->
+        <van-row>
+          <!-- left -->
+          <van-col span="4">
+            <van-row>
+              <div class="step-common">2020/11/11 14:32:23</div>
+            </van-row>
+            <van-row>
+              <div>&nbsp;</div>
+            </van-row>
+          </van-col>
+          <!-- medium -->
+          <van-col span="1">
+            <van-row>
+              <img src="../../../static/images/user.png" class="step-icon" />
+            </van-row>
+            <van-row>
+              <div class="v-divider-1">&nbsp;</div>
+            </van-row>
+          </van-col>
+          <!-- right -->
+          <van-col offset="1" span="18">
+            <van-row>
+              <van-col>
+                <div class="step-common-title">垃圾运输中</div>
+              </van-col>
+              <van-col>
+                <button class="step-common-btn">到达清算点</button>
+              </van-col>
+            </van-row>
+            <van-row>
+              <span class="limit-common">正在前往清算点</span>
+            </van-row>
+          </van-col>
+        </van-row>
+      </div>
+
       <!-- 垃圾装车 -->
       <div class="step-6">
         <!-- top -->
@@ -113,7 +151,7 @@
                 <van-col>
                   <van-row>
                     <van-col>
-                      <div class="step-common-title">垃圾倾倒</div>
+                      <div class="step-common-title">垃圾装车</div>
                     </van-col>
                     <van-col>
                       <button class="step-common-btn">完成订单</button>
@@ -123,7 +161,7 @@
               </van-row>
               <!-- bottom -->
               <van-row>
-                <van-col>
+                <van-col span="22">
                   <div class="step-6-imgs">
                     <van-row>
                       <van-col span="12">
@@ -141,7 +179,7 @@
                         <van-uploader
                           :file-list="fileList"
                           :max-count="maxCount"
-                          preview-size="55"
+                          preview-size="50"
                           :deletable="false"
                         />
                       </van-col>
@@ -172,7 +210,7 @@
               <img src="../../../static/images/user.png" class="step-icon" />
             </van-row>
             <van-row>
-              <div class="v-divider">&nbsp;</div>
+              <div class="v-divider-2">&nbsp;</div>
             </van-row>
           </van-col>
           <!-- right -->
@@ -182,7 +220,8 @@
                 <van-col>
                   <van-row>
                     <van-col>
-                      <div class="step-common-title">垃圾倾倒</div>
+                      <div class="step-common-title">垃圾清算</div>
+                      <div class="limit-common">装修面积：60平方米</div>
                     </van-col>
                     <van-col>
                       <button class="step-common-btn">完成订单</button>
@@ -192,7 +231,7 @@
               </van-row>
               <!-- bottom -->
               <van-row>
-                <van-col>
+                <van-col span="22">
                   <div class="step-6-imgs">
                     <van-row>
                       <van-col span="12">
@@ -210,7 +249,7 @@
                         <van-uploader
                           :file-list="fileList"
                           :max-count="maxCount"
-                          preview-size="55"
+                          preview-size="50"
                           :deletable="false"
                         />
                       </van-col>
@@ -223,7 +262,133 @@
         </van-row>
       </div>
       <!-- 前往目的地 -->
+      <div class="step-6">
+        <!-- top -->
+        <van-row>
+          <!-- left -->
+          <van-col span="4">
+            <van-row>
+              <div class="step-common">2020/11/11 14:32:23</div>
+            </van-row>
+            <van-row>
+              <div>&nbsp;</div>
+            </van-row>
+          </van-col>
+          <!-- medium -->
+          <van-col span="1">
+            <van-row>
+              <img src="../../../static/images/user.png" class="step-icon" />
+            </van-row>
+            <van-row>
+              <div class="v-divider-2">&nbsp;</div>
+            </van-row>
+          </van-col>
+          <!-- right -->
+          <van-col offset="1" span="18">
+            <van-row>
+              <van-row>
+                <van-col>
+                  <van-row>
+                    <van-col>
+                      <div class="step-common-title">正在前往目的地</div>
+                    </van-col>
+                    <van-col>
+                      <button class="step-common-btn">到达目的地</button>
+                    </van-col>
+                  </van-row>
+                </van-col>
+              </van-row>
+              <!-- bottom -->
+              <van-row>
+                <van-col span="22">
+                  <div class="step-6-imgs">
+                    <van-row>
+                      <div class="step-common-title">订单地址区、街道</div>
+                      <div class="limit-common">上海市奉贤区奉浦大道123号</div>
+                      <div class="step-common-title">联系人</div>
+                      <div class="limit-common">
+                        <van-row>
+                          <van-col span="4">
+                            <span>赵庆飞</span>
+                          </van-col>
+                          <van-col offset="2">
+                            <span>电话联系：</span>
+                            <span style="color: red">15021179915</span>
+                          </van-col>
+                        </van-row>
+                      </div>
+                    </van-row>
+                  </div>
+                </van-col>
+              </van-row>
+            </van-row>
+          </van-col>
+        </van-row>
+      </div>
       <!-- 订单信息 -->
+      <div class="step-6">
+        <!-- top -->
+        <van-row>
+          <!-- left -->
+          <van-col span="4">
+            <van-row>
+              <div class="step-common">2020/11/11 14:32:23</div>
+            </van-row>
+            <van-row>
+              <div>&nbsp;</div>
+            </van-row>
+          </van-col>
+          <!-- medium -->
+          <van-col span="1">
+            <van-row>
+              <img src="../../../static/images/user.png" class="step-icon" />
+            </van-row>
+            <van-row>
+              <div class="v-divider-2">&nbsp;</div>
+            </van-row>
+          </van-col>
+          <!-- right -->
+          <van-col offset="1" span="18">
+            <van-row>
+              <van-row>
+                <van-col>
+                  <van-row>
+                    <van-col>
+                      <div class="step-common-title">已接单</div>
+                    </van-col>
+                    <van-col>
+                      <button class="step-common-btn">立即出发</button>
+                    </van-col>
+                  </van-row>
+                </van-col>
+              </van-row>
+              <!-- bottom -->
+              <van-row>
+                <van-col span="22">
+                  <div class="step-6-imgs">
+                    <van-row>
+                      <div class="step-common-title">订单地址区、街道</div>
+                      <div class="limit-common">上海市奉贤区奉浦大道123号</div>
+                      <div class="step-common-title">建筑面积</div>
+                      <div class="limit-common">
+                        <van-row>
+                          <van-col span="6">
+                            <span>120平方米</span>
+                          </van-col>
+                          <van-col offset="2">
+                            <span>预约时间：</span>
+                            <span style="color: red">2020-12-12 13:10</span>
+                          </van-col>
+                        </van-row>
+                      </div>
+                    </van-row>
+                  </div>
+                </van-col>
+              </van-row>
+            </van-row>
+          </van-col>
+        </van-row>
+      </div>
     </div>
   </div>
 </template>
@@ -336,5 +501,17 @@ export default {
   width: 2px;
   float: right;
   height: 90px;
+}
+.v-divider-1 {
+  background-color: rgba(0, 0, 0, 0.01);
+  width: 2px;
+  float: right;
+  height: 30px;
+}
+.v-divider-2 {
+  background-color: rgba(0, 0, 0, 0.01);
+  width: 2px;
+  float: right;
+  height: 115px;
 }
 </style>
