@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-13 19:49:34
+ * @LastEditTime: 2020-12-13 20:28:28
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -410,7 +410,7 @@
     </div>
     <div v-else>
       <div class="no-login">
-        <span>登录后获取订单信息</span>
+        <span> 登录后获取订单信息 </span>
         <button
           open-type="getUserInfo"
           class="login-btn"

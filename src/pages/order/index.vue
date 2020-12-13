@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-12 14:03:44
+ * @LastEditTime: 2020-12-13 20:30:17
  * @FilePath: /mp-driver/src/pages/order/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -19,12 +19,13 @@
   </div>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   data() {
-    return {
-      active: 0,
-      isLogin: false, // 是否登录
-    };
+    return {};
+  },
+  computed: {
+    ...mapState(["isLogin", "openID", "userID"]),
   },
   methods: {
     onChange(event) {

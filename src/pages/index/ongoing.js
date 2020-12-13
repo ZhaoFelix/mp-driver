@@ -2,10 +2,12 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-13 19:51:26
+ * @LastEditTime: 2020-12-13 20:28:39
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
+
+import { mapState } from "vuex";
 export default {
     data() {
       return {
@@ -31,6 +33,9 @@ export default {
         isLogin:false,// 是否登录
         orderInfo:null
       };
+    },
+    computed:{
+      ...mapState(["isLogin","openID", "userID"]),
     },
     methods: {
       bindGetUserInfo(e, id) {
@@ -61,13 +66,10 @@ export default {
                 console.log(res.data.data[0]);
                 this.$store.commit("setUserID",res.data.data[0].user_id)
                 this.$store.commit("changeLogin");
-                //
-                if (id == 0) {
-                  this.show = false;
-                } else {
+                this.isLogin = true
+                // 前往认证
                   const url = "../checkPage/main";
                   mpvue.navigateTo({ url });
-                }
               } else {
                 console.log("获取失败");
               }
@@ -92,11 +94,21 @@ export default {
               }
                 // 判断是否已认证
               else  if (dataArr[0].user_type === null) {
+                  //  存储用户ID和用户类型
+                  this.$store.commit("setUserID",dataArr[0].user_id)
+                  this.$store.commit("setUserType",dataArr[0].user_type)
+                  this.$store.commit("changeLogin")
+                  this.isLogin = true
                   // 未认证，前往认证页面
+                  const url = "../checkPage/main";
+                  mpvue.navigateTo({ url });
                 } else {
                     //  存储用户ID和用户类型
                   this.$store.commit("setUserID",dataArr[0].user_id)
                   this.$store.commit("setUserType",dataArr[0].user_type)
+                  this.$store.commit("changeLogin")
+                  this.isLogin = true
+                  console.log(this.$store.state.isLogin)
                 }
             } else {
               console.log("查询失败", res.data.data);

@@ -2,7 +2,9 @@
     "pages": [
         "pages/index/main",
         "pages/order/main",
-        "pages/mine/main"
+        "pages/mine/main",
+        "pages/checkPage/main",
+        "pages/propInformation/main"
     ],
     "usingComponents": {
         "van-button": "vant-weapp/dist/button/index",
@@ -13,7 +15,8 @@
         "van-image": "vant-weapp/dist/image/index",
         "van-cell": "vant-weapp/dist/cell/index",
         "van-uploader": "vant-weapp/dist/uploader/index",
-        "van-dialog": "vant-weapp/dist/dialog/index"
+        "van-dialog": "vant-weapp/dist/dialog/index",
+        "van-field": "vant-weapp/dist/field/index"
     },
     "window": {
         "backgroundTextStyle": "light",
