@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-11 14:26:56
+ * @LastEditTime: 2020-12-13 19:49:34
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -411,7 +411,13 @@
     <div v-else>
       <div class="no-login">
         <span>登录后获取订单信息</span>
-        <button class="login-btn">登录</button>
+        <button
+          open-type="getUserInfo"
+          class="login-btn"
+          @getuserinfo="bindGetUserInfo($event)"
+        >
+          登录
+        </button>
       </div>
     </div>
   </div>
