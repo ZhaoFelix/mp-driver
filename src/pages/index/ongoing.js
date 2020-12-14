@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-14 15:54:55
+ * @LastEditTime: 2020-12-14 16:19:05
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -60,6 +60,12 @@ export default {
       get_time:function(){
         return (this.orderInfo.driver_get_time + "").slice(11,19)
       },
+      complete_date:function(){
+        return (this.orderInfo.driver_complete_time + "").slice(0,10)
+      },
+      complete_time:function(){
+        return (this.orderInfo.driver_complete_time + "").slice(11,19)
+      },
       // 计算前往目的地花费的时间
       goDesTimeGap(){
       return this.timeGap(this.orderInfo.driver_go_des,this.orderInfo.driver_reach_des != null ? this.orderInfo.driver_reach_des : new Date() )
@@ -92,6 +98,26 @@ export default {
         } else {
           return true 
         }
+      },
+      isComplete(){
+        if (this.orderInfo.driver_complete_img === null || this.orderInfo.driver_complete_img === undefined) {
+          return   true
+        }
+        else if(this.orderInfo.driver_complete_img instanceof Array) {
+            return !(this.orderInfo.driver_complete_img.length == this.maxCount)
+        } else {
+          return true 
+        }
+      },
+      isCompleteDeleted(){
+        if (this.orderInfo.driver_complete_img === null || this.orderInfo.driver_complete_img === undefined) {
+          return   false
+        }
+        else if(this.orderInfo.driver_complete_img instanceof Array) {
+            return true
+        } else {
+          return false 
+        } 
       },
       isReachDeleted(){
         if (this.orderInfo.driver_reach_img === null || this.orderInfo.driver_reach_img === undefined) {
@@ -135,6 +161,17 @@ export default {
           return JSON.parse(this.orderInfo.driver_get_img).length + "/" + this.maxCount
         }
       },
+      isCompleteLimit(){
+        // console.log(this.orderInfo.driver_reach_img)
+        if (this.orderInfo.driver_complete_img === null || this.orderInfo.driver_complete_img === undefined) {
+          return    "0/" + this.maxCount 
+        }
+        else if(this.orderInfo.driver_complete_img instanceof Array) {
+            return this.orderInfo.driver_complete_img.length + "/" + this.maxCount
+        } else {
+          return JSON.parse(this.orderInfo.driver_complete_img).length + "/" + this.maxCount
+        }
+      },
       driverReachImages(){
         if (this.orderInfo.driver_reach_img != null) {
           if (this.orderInfo.driver_reach_img instanceof Array) {
@@ -157,6 +194,18 @@ export default {
           return this.orderInfo.driver_get_img
         }
       },
+      driverCompleteImages(){
+        if (this.orderInfo.driver_complete_img != null) {
+          if (this.orderInfo.driver_complete_img instanceof Array) {
+              return this.orderInfo.driver_complete_img
+          } else {
+            return JSON.parse(this.orderInfo.driver_complete_img)
+          }
+        } else {
+          return this.orderInfo.driver_complete_img
+        }
+      },
+      
       isReachTrashDes(){
         return this.orderInfo.driver_reach_trash == null ? false : true
       }
@@ -431,7 +480,59 @@ export default {
         console.log("更新失败")
       }
     })
-  } 
+  } ,
+
+  // 订单完成
+  afterCompleteRead(event) {
+    console.log("图片上传")
+    const { file } = event.mp.detail;
+    let fileName = "ningjin_dev/" + new Date().getTime() + ".png"
+    var _this = this
+    wx.uploadFile({
+        url: uploadUrl, // 接口地址
+        filePath: file.url,
+        name: "file",
+        formData: {
+            key: fileName,
+            policy: this.OSS.policy,
+            OSSAccessKeyId: this.OSS.OSSAccessKeyId,
+            signature: this.OSS.signature
+        },
+        success(res) {
+          if (_this.orderInfo.driver_complete_img == undefined) {
+            _this.orderInfo.driver_complete_img = []
+          }
+            _this.orderInfo.driver_complete_img.push({ url: downloadUrl + fileName + previewImage, name: "", thumb: downloadUrl + fileName + processImage })
+            console.log(_this.orderInfo.driver_complete_img)
+            _this.orderInfo.driver_complete_img = [..._this.orderInfo.driver_complete_img]
+        },
+        fail(error) {
+            console.log(error)
+        }
+    });
+},
+// 删除图片
+  deleteCompleteImage(event) {
+      this.orderInfo.driver_complete_img.pop(this.orderInfo.driver_get_img[event.mp.detail.index])
+      this.orderInfo.driver_complete_img = [...this.orderInfo.driver_complete_img]
+  },
+  completeOrder(){
+    let _this = this
+      this.$wxRequest
+      .post({
+        url:'/Dmobile/order/update/complete',
+        data:{
+          orderId:this.orderInfo.order_id,
+          completeImageList:this.orderInfo.driver_complete_img
+        }
+      }).then((res) => {
+        if (res.data.code == 20000) { 
+          _this.fetchData()
+        } else {
+          console.log("更新失败")
+        }
+      })
+  }
   },
     mounted(){
       var _this = this;

@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-14 15:55:52
+ * @LastEditTime: 2020-12-14 16:14:38
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -23,8 +23,10 @@
           <!-- left -->
           <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11</div>
-              <div class="step-common-1">14:32:23</div>
+              <div class="step-common">
+                {{ complete_date == "null" ? "" : complete_date }}
+              </div>
+              <div class="step-common-1">{{ complete_time }}</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -51,7 +53,13 @@
                       <div class="step-common-title">垃圾倾倒</div>
                     </van-col>
                     <van-col>
-                      <button class="step-common-btn">完成订单</button>
+                      <button
+                        class="step-common-btn"
+                        :disabled="isComplete"
+                        @click="completeOrder"
+                      >
+                        完成订单
+                      </button>
                     </van-col>
                   </van-row>
                 </van-col>
@@ -66,7 +74,7 @@
                       </van-col>
                       <van-col offset="8" span="4">
                         <div class="limit-common limit-number">
-                          {{ fileList.length + "/" + maxCount }}
+                          {{ isCompleteLimit }}
                         </div>
                       </van-col>
                     </van-row>
@@ -74,10 +82,12 @@
                       <van-col>
                         <div style="height: 8px"></div>
                         <van-uploader
-                          :file-list="fileList"
+                          :file-list="driverCompleteImages"
                           :max-count="maxCount"
                           preview-size="50"
-                          :deletable="false"
+                          :deletable="isCompleteDeleted"
+                          @afterRead="afterCompleteRead"
+                          @delete="deleteCompleteImage"
                         />
                       </van-col>
                     </van-row>
