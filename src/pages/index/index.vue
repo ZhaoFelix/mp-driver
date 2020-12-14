@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-14 13:40:44
+ * @LastEditTime: 2020-12-14 14:03:57
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -209,8 +209,8 @@
           <!-- left -->
           <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11</div>
-              <div class="step-common-1">14:32:23</div>
+              <div class="step-common">{{ get_date }}</div>
+              <div class="step-common-1">{{ get_time }}</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -240,7 +240,11 @@
                       </div>
                     </van-col>
                     <van-col>
-                      <button class="step-common-btn" :disabled="isGet">
+                      <button
+                        class="step-common-btn"
+                        :disabled="isGet"
+                        @click="getImages"
+                      >
                         完成清算
                       </button>
                     </van-col>
@@ -265,7 +269,7 @@
                       <van-col span="24">
                         <div style="height: 8px"></div>
                         <van-uploader
-                          :file-list="orderInfo.driver_get_img"
+                          :file-list="driverGetImages"
                           :max-count="maxCount"
                           preview-size="50"
                           :deletable="isGetDeleted"

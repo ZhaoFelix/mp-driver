@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-14 13:39:15
+ * @LastEditTime: 2020-12-14 14:03:24
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -41,11 +41,18 @@ export default {
     },
     computed:{
       ...mapState(["isLogin","openID", "userID"]),
+      // TODO:定义过滤器替换重复内容
       place_date:function(){
         return (this.orderInfo.user_place_order_time + "").slice(0,10)
       },
       place_time:function(){
         return (this.orderInfo.user_place_order_time + "").slice(11,19)
+      },
+      get_date:function(){
+        return (this.orderInfo.driver_get_time + "").slice(0,10)
+      },
+      get_time:function(){
+        return (this.orderInfo.driver_get_time + "").slice(11,19)
       },
       // 计算前往目的地花费的时间
       goDesTimeGap(){
@@ -85,6 +92,13 @@ export default {
         } else {
            return JSON.parse(this.orderInfo.driver_get_img).length + "/" + this.maxCount
         }
+      },
+      driverGetImages(){
+         if (this.orderInfo.driver_get_img != null) {
+           return JSON.parse(this.orderInfo.driver_get_img)
+         } else {
+           return this.orderInfo.driver_get_img
+         }
       }
     },
     methods: {
@@ -274,7 +288,23 @@ export default {
         this.orderInfo.driver_get_img.pop(this.orderInfo.driver_get_img[event.mp.detail.index])
         this.orderInfo.driver_get_img = [...this.orderInfo.driver_get_img]
     },
-      
+    getImages(){
+      let _this = this
+      this.$wxRequest
+      .post({
+        url:'/Dmobile/order/update/getimage',
+        data:{
+          orderId:this.orderInfo.order_id,
+          getImageList:this.orderInfo.driver_get_img
+        }
+      }).then((res) => {
+        if (res.data.code == 20000) { 
+          _this.fetchData()
+        } else {
+          console.log("更新失败")
+        }
+      })
+    } 
     },
   
     mounted(){
