@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-14 14:03:24
+ * @LastEditTime: 2020-12-14 14:52:03
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -48,6 +48,12 @@ export default {
       place_time:function(){
         return (this.orderInfo.user_place_order_time + "").slice(11,19)
       },
+      reach_date:function(){
+        return (this.orderInfo.driver_reach_time + "").slice(0,10)
+      },
+      reach_time:function(){
+        return (this.orderInfo.driver_reach_time + "").slice(11,19)
+      },
       get_date:function(){
         return (this.orderInfo.driver_get_time + "").slice(0,10)
       },
@@ -56,49 +62,53 @@ export default {
       },
       // 计算前往目的地花费的时间
       goDesTimeGap(){
-       return this.timeGap(this.orderInfo.driver_go_des)
+      return this.timeGap(this.orderInfo.driver_go_des)
       },
       isReach(){
-       return this.orderInfo.driver_reach_des !== null ? true : false
+      return this.orderInfo.driver_reach_des !== null ? true : false
       },
       // 是否可以进行清算
-      isGet(){
-        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
+      isReach1(){
+        if (this.orderInfo.driver_reach_img === null || this.orderInfo.driver_reach_img === undefined) {
           return   true
         }
-        else if(this.orderInfo.driver_get_img instanceof Array) {
-            return !(this.orderInfo.driver_get_img.length == this.maxCount)
+        else if(this.orderInfo.driver_reach_img instanceof Array) {
+            return !(this.orderInfo.driver_reach_img.length == this.maxCount)
         } else {
-           return true 
+          return true 
         } 
       },
-      isGetDeleted(){
-        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
+      isReachDeleted(){
+        if (this.orderInfo.driver_reach_img === null || this.orderInfo.driver_reach_img === undefined) {
           return   false
         }
-        else if(this.orderInfo.driver_get_img instanceof Array) {
+        else if(this.orderInfo.driver_reach_img instanceof Array) {
             return true
         } else {
-           return false 
+          return false 
         } 
       },
-      isGetLimit(){
-        // console.log(this.orderInfo.driver_get_img)
-        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
+      isReachLimit(){
+        // console.log(this.orderInfo.driver_reach_img)
+        if (this.orderInfo.driver_reach_img === null || this.orderInfo.driver_reach_img === undefined) {
           return    "0/" + this.maxCount 
         }
-        else if(this.orderInfo.driver_get_img instanceof Array) {
-            return this.orderInfo.driver_get_img.length + "/" + this.maxCount
+        else if(this.orderInfo.driver_reach_img instanceof Array) {
+            return this.orderInfo.driver_reach_img.length + "/" + this.maxCount
         } else {
-           return JSON.parse(this.orderInfo.driver_get_img).length + "/" + this.maxCount
+          return JSON.parse(this.orderInfo.driver_reach_img).length + "/" + this.maxCount
         }
       },
-      driverGetImages(){
-         if (this.orderInfo.driver_get_img != null) {
-           return JSON.parse(this.orderInfo.driver_get_img)
-         } else {
-           return this.orderInfo.driver_get_img
-         }
+      driverReachImages(){
+        if (this.orderInfo.driver_reach_img != null) {
+          if (this.orderInfo.driver_reach_img instanceof Array) {
+              return this.orderInfo.driver_reach_img
+          } else {
+            return JSON.parse(this.orderInfo.driver_reach_img)
+          }
+        } else {
+          return this.orderInfo.driver_reach_img
+        }
       }
     },
     methods: {
@@ -254,7 +264,7 @@ export default {
             }
         });
       },
-      afterGetRead(event) {
+      afterReachRead(event) {
         console.log("图片上传")
         const { file } = event.mp.detail;
         let fileName = "ningjin_dev/" + new Date().getTime() + ".png"
@@ -270,12 +280,12 @@ export default {
                 signature: this.OSS.signature
             },
             success(res) {
-              if (_this.orderInfo.driver_get_img == undefined) {
-                _this.orderInfo.driver_get_img = []
+              if (_this.orderInfo.driver_reach_img == undefined) {
+                _this.orderInfo.driver_reach_img = []
               }
-                _this.orderInfo.driver_get_img.push({ url: downloadUrl + fileName + previewImage, name: "", thumb: downloadUrl + fileName + processImage })
-                console.log(_this.orderInfo.driver_get_img)
-                _this.orderInfo.driver_get_img = [..._this.orderInfo.driver_get_img]
+                _this.orderInfo.driver_reach_img.push({ url: downloadUrl + fileName + previewImage, name: "", thumb: downloadUrl + fileName + processImage })
+                console.log(_this.orderInfo.driver_reach_img)
+                _this.orderInfo.driver_reach_img = [..._this.orderInfo.driver_reach_img]
             },
             fail(error) {
                 console.log(error)
@@ -283,19 +293,19 @@ export default {
         });
     },
     // 删除图片
-    deleteGetImage(event) {
+    deleteReachImage(event) {
         console.log(event.mp.detail.index)
-        this.orderInfo.driver_get_img.pop(this.orderInfo.driver_get_img[event.mp.detail.index])
-        this.orderInfo.driver_get_img = [...this.orderInfo.driver_get_img]
+        this.orderInfo.driver_reach_img.pop(this.orderInfo.driver_reach_img[event.mp.detail.index])
+        this.orderInfo.driver_reach_img = [...this.orderInfo.driver_reach_img]
     },
-    getImages(){
+    reachImages(){
       let _this = this
       this.$wxRequest
       .post({
         url:'/Dmobile/order/update/getimage',
         data:{
           orderId:this.orderInfo.order_id,
-          getImageList:this.orderInfo.driver_get_img
+          reachImageList:this.orderInfo.driver_reach_img
         }
       }).then((res) => {
         if (res.data.code == 20000) { 
