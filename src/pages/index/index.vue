@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-14 08:24:40
+ * @LastEditTime: 2020-12-14 09:55:15
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -276,14 +276,14 @@
         </van-row>
       </div>
       <!-- 前往目的地 -->
-      <div class="step-6">
+      <div class="step-6" v-if="orderInfo.order_status == 4">
         <!-- top -->
         <van-row>
           <!-- left -->
           <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11</div>
-              <div class="step-common-1">14:32:23</div>
+              <div class="step-common">已用时</div>
+              <div class="step-common-1">{{ goDesTimeGap }}</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -310,7 +310,13 @@
                       <div class="step-common-title">正在前往目的地</div>
                     </van-col>
                     <van-col>
-                      <button class="step-common-btn">到达目的地</button>
+                      <button
+                        class="step-common-btn"
+                        :disabled="isReach"
+                        @click="reachDestination"
+                      >
+                        到达目的地
+                      </button>
                     </van-col>
                   </van-row>
                 </van-col>
@@ -326,11 +332,13 @@
                       <div class="limit-common">
                         <van-row>
                           <van-col span="5">
-                            <span>赵庆飞</span>
+                            <span>{{ orderInfo.order_user_name }}</span>
                           </van-col>
                           <van-col offset="2">
                             <span>电话联系：</span>
-                            <span style="color: red">15021179915</span>
+                            <span style="color: red">{{
+                              orderInfo.user_phone
+                            }}</span>
                           </van-col>
                         </van-row>
                       </div>
@@ -349,8 +357,10 @@
           <!-- left -->
           <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11</div>
-              <div class="step-common-1">14:32:23</div>
+              <div class="step-common">
+                {{ place_date }}
+              </div>
+              <div class="step-common-1">{{ place_time }}</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -377,7 +387,13 @@
                       <div class="step-common-title">已派单</div>
                     </van-col>
                     <van-col>
-                      <button class="step-common-btn">立即出发</button>
+                      <button
+                        class="step-common-btn"
+                        :disabled="orderInfo.order_status != 3 ? true : false"
+                        @click="goDestination"
+                      >
+                        立即出发
+                      </button>
                     </van-col>
                   </van-row>
                 </van-col>
@@ -388,16 +404,20 @@
                   <div class="step-6-imgs">
                     <van-row>
                       <div class="step-common-title">订单地址区、街道</div>
-                      <div class="limit-common">上海市奉贤区奉浦大道123号</div>
+                      <div class="limit-common">
+                        {{ orderInfo.user_address }}
+                      </div>
                       <div class="step-common-title">建筑面积</div>
                       <div class="limit-common">
                         <van-row>
                           <van-col span="7">
-                            <span>120平方米</span>
+                            <span>{{ orderInfo.order_size + "平方米" }}</span>
                           </van-col>
                           <van-col>
                             <span>&nbsp;预约时间：</span>
-                            <span style="color: red">2020-12-12 13:10</span>
+                            <span style="color: red">{{
+                              orderInfo.user_reserve_time
+                            }}</span>
                           </van-col>
                         </van-row>
                       </div>

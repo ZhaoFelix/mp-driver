@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-14 08:25:27
+ * @LastEditTime: 2020-12-14 09:56:01
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -38,8 +38,28 @@ export default {
     },
     computed:{
       ...mapState(["isLogin","openID", "userID"]),
+      place_date:function(){
+        return (this.orderInfo.user_place_order_time + "").slice(0,10)
+      },
+      place_time:function(){
+        return (this.orderInfo.user_place_order_time + "").slice(11,19)
+      },
+      // 计算前往目的地花费的时间
+      goDesTimeGap(){
+       return this.timeGap(this.orderInfo.driver_go_des)
+      },
+      isReach(){
+       return this.orderInfo.driver_reach_des !== null ? true : false
+      }
     },
     methods: {
+      timeGap(startTimeStr){
+        let endTime = new Date()
+        let startTime = new Date(startTimeStr)
+        return Math.floor((endTime - startTime) / 1000 / 60 /60) >= 1 
+        ? Math.floor((endTime - startTime) / 1000 / 60 /60) + "小时" + Math.floor((endTime - startTime) / 1000 / 60) + "分钟" :
+        Math.floor((endTime - startTime) / 1000 / 60) + "分钟"
+      },
       bindGetUserInfo(e, id) {
         console.log("测试")
         this.openID = this.$store.state.openID;
@@ -136,6 +156,40 @@ export default {
             console.log("查询失败")
           }
         })
+      },
+      // 前往目的地
+      goDestination(){
+        let order_id = this.orderInfo.order_id
+        if (order_id != undefined) {
+          this.$wxRequest
+          .get({
+            url:'/Dmobile/order/update/status4?orderId='+order_id,
+          })
+          .then((res) => {
+            if (res.data.code == 20000){
+                this.fetchData()
+            } else {
+
+            }
+          })
+        }
+      },
+      // 到达目的地
+      reachDestination(){
+        let order_id = this.orderInfo.order_id
+        if (order_id != undefined) {
+          this.$wxRequest
+          .get({
+            url:'/Dmobile/order/update/reachDes?orderId='+order_id,
+          })
+          .then((res) => {
+            if (res.data.code == 20000){
+                this.fetchData()
+            } else {
+              
+            }
+          })
+        }
       }
     },
   
