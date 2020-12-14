@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-14 14:52:20
+ * @LastEditTime: 2020-12-14 15:05:43
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -165,7 +165,13 @@
                       <div class="step-common-title">渣土装车</div>
                     </van-col>
                     <van-col>
-                      <button class="step-common-btn">装车完成</button>
+                      <button
+                        class="step-common-btn"
+                        :disabled="isGet"
+                        @click="getImages"
+                      >
+                        装车完成
+                      </button>
                     </van-col>
                   </van-row>
                 </van-col>
@@ -180,7 +186,7 @@
                       </van-col>
                       <van-col offset="8" span="4">
                         <div class="limit-common limit-number">
-                          {{ fileList.length + "/" + maxCount }}
+                          {{ isGetLimit }}
                         </div>
                       </van-col>
                     </van-row>
@@ -188,10 +194,12 @@
                       <van-col>
                         <div style="height: 8px"></div>
                         <van-uploader
-                          :file-list="fileList"
+                          :file-list="driverGetImages"
                           :max-count="maxCount"
                           preview-size="50"
-                          :deletable="false"
+                          :deletable="isGetDeleted"
+                          @afterRead="afterGetRead"
+                          @delete="deleteGetImage"
                         />
                       </van-col>
                     </van-row>

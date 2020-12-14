@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-14 14:52:03
+ * @LastEditTime: 2020-12-14 15:06:35
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -78,11 +78,32 @@ export default {
           return true 
         } 
       },
+      // 是否装车完成
+      isGet(){
+        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
+          return   true
+        }
+        else if(this.orderInfo.driver_get_img instanceof Array) {
+            return !(this.orderInfo.driver_get_img.length == this.maxCount)
+        } else {
+          return true 
+        }
+      },
       isReachDeleted(){
         if (this.orderInfo.driver_reach_img === null || this.orderInfo.driver_reach_img === undefined) {
           return   false
         }
         else if(this.orderInfo.driver_reach_img instanceof Array) {
+            return true
+        } else {
+          return false 
+        } 
+      },
+      isGetDeleted(){
+        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
+          return   false
+        }
+        else if(this.orderInfo.driver_get_img instanceof Array) {
             return true
         } else {
           return false 
@@ -99,6 +120,17 @@ export default {
           return JSON.parse(this.orderInfo.driver_reach_img).length + "/" + this.maxCount
         }
       },
+      isGetLimit(){
+        // console.log(this.orderInfo.driver_reach_img)
+        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
+          return    "0/" + this.maxCount 
+        }
+        else if(this.orderInfo.driver_get_img instanceof Array) {
+            return this.orderInfo.driver_get_img.length + "/" + this.maxCount
+        } else {
+          return JSON.parse(this.orderInfo.driver_get_img).length + "/" + this.maxCount
+        }
+      },
       driverReachImages(){
         if (this.orderInfo.driver_reach_img != null) {
           if (this.orderInfo.driver_reach_img instanceof Array) {
@@ -108,6 +140,17 @@ export default {
           }
         } else {
           return this.orderInfo.driver_reach_img
+        }
+      },
+      driverGetImages(){
+        if (this.orderInfo.driver_get_img != null) {
+          if (this.orderInfo.driver_get_img instanceof Array) {
+              return this.orderInfo.driver_get_img
+          } else {
+            return JSON.parse(this.orderInfo.driver_get_img)
+          }
+        } else {
+          return this.orderInfo.driver_get_img
         }
       }
     },
@@ -302,7 +345,7 @@ export default {
       let _this = this
       this.$wxRequest
       .post({
-        url:'/Dmobile/order/update/getimage',
+        url:'/Dmobile/order/update/reachimage',
         data:{
           orderId:this.orderInfo.order_id,
           reachImageList:this.orderInfo.driver_reach_img
@@ -314,9 +357,59 @@ export default {
           console.log("更新失败")
         }
       })
-    } 
     },
-  
+    // 装车完成的函数
+    afterGetRead(event) {
+      console.log("图片上传")
+      const { file } = event.mp.detail;
+      let fileName = "ningjin_dev/" + new Date().getTime() + ".png"
+      var _this = this
+      wx.uploadFile({
+          url: uploadUrl, // 接口地址
+          filePath: file.url,
+          name: "file",
+          formData: {
+              key: fileName,
+              policy: this.OSS.policy,
+              OSSAccessKeyId: this.OSS.OSSAccessKeyId,
+              signature: this.OSS.signature
+          },
+          success(res) {
+            if (_this.orderInfo.driver_get_img == undefined) {
+              _this.orderInfo.driver_get_img = []
+            }
+              _this.orderInfo.driver_get_img.push({ url: downloadUrl + fileName + previewImage, name: "", thumb: downloadUrl + fileName + processImage })
+              console.log(_this.orderInfo.driver_get_img)
+              _this.orderInfo.driver_get_img = [..._this.orderInfo.driver_get_img]
+          },
+          fail(error) {
+              console.log(error)
+          }
+      });
+  },
+  // 删除图片
+  deleteGetImage(event) {
+      this.orderInfo.driver_get_img.pop(this.orderInfo.driver_get_img[event.mp.detail.index])
+      this.orderInfo.driver_get_img = [...this.orderInfo.driver_get_img]
+  },
+  getImages(){
+    let _this = this
+    this.$wxRequest
+    .post({
+      url:'/Dmobile/order/update/getimage',
+      data:{
+        orderId:this.orderInfo.order_id,
+        getImageList:this.orderInfo.driver_get_img
+      }
+    }).then((res) => {
+      if (res.data.code == 20000) { 
+        _this.fetchData()
+      } else {
+        console.log("更新失败")
+      }
+    })
+  } 
+  },
     mounted(){
       var _this = this;
       // 登录获取openID
