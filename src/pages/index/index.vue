@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-13 20:28:28
+ * @LastEditTime: 2020-12-14 08:24:40
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -12,7 +12,9 @@
       <!-- 订单号 -->
       <div class="order-number">
         <span>订单号 </span>
-        <span style="color: rgba(1, 1, 1, 0.7)">5678203948756543456</span>
+        <span style="color: rgba(1, 1, 1, 0.7)">{{
+          orderInfo.order_number
+        }}</span>
       </div>
       <!-- 垃圾倾倒 -->
       <div class="step-6">

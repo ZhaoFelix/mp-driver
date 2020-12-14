@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-13 20:48:36
+ * @LastEditTime: 2020-12-14 08:25:27
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -31,7 +31,9 @@ export default {
         ],
         maxCount: 4,
         isLogin:false,// 是否登录
-        orderInfo:null
+        orderInfo:{
+          
+        }
       };
     },
     computed:{
@@ -109,12 +111,32 @@ export default {
                   this.$store.commit("changeLogin")
                   this.isLogin = true
                   console.log(this.$store.state.isLogin)
+                  // 获取订单信息
+                  this.fetchData()
                 }
             } else {
               console.log("查询失败", res.data.data);
             }
           });
       },
+       // 获取实时订单
+      fetchData(){
+        // TODO:待添加具体ID
+        this.$wxRequest
+        .get({
+          url:'/Dmobile/order/query',
+        })
+        .then((res) => {
+          if (res.data.code == 20000) {
+            console.log("测试")
+            this.orderInfo = res.data.data[0]
+            console.log(this.orderInfo.car_id)
+          } 
+          else {
+            console.log("查询失败")
+          }
+        })
+      }
     },
   
     mounted(){
