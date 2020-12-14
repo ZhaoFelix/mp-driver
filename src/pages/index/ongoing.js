@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-14 11:28:47
+ * @LastEditTime: 2020-12-14 13:39:15
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -56,24 +56,39 @@ export default {
       },
       // 是否可以进行清算
       isGet(){
-        // if (JSON.parse(this.orderInfo.driver_get_img) === undefined){
-        //   return false
-        // } else if (JSON.parse(this.orderInfo.driver_get_img).length === 4 ) {
-        //     return false
-        // } else {
-        //   return true
-        // }
-        return true
+        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
+          return   true
+        }
+        else if(this.orderInfo.driver_get_img instanceof Array) {
+            return !(this.orderInfo.driver_get_img.length == this.maxCount)
+        } else {
+           return true 
+        } 
+      },
+      isGetDeleted(){
+        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
+          return   false
+        }
+        else if(this.orderInfo.driver_get_img instanceof Array) {
+            return true
+        } else {
+           return false 
+        } 
       },
       isGetLimit(){
         // console.log(this.orderInfo.driver_get_img)
-        return this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined ?  "0/" + this.maxCount :
-        JSON.parse(this.orderInfo.driver_get_img).length + "/" + this.maxCount
+        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
+          return    "0/" + this.maxCount 
+        }
+        else if(this.orderInfo.driver_get_img instanceof Array) {
+            return this.orderInfo.driver_get_img.length + "/" + this.maxCount
+        } else {
+           return JSON.parse(this.orderInfo.driver_get_img).length + "/" + this.maxCount
+        }
       }
     },
     methods: {
       timeGap(startTimeStr){
-        
         let endTime = this.orderInfo.driver_reach_des === null ? 
         new Date() : new Date(this.orderInfo.driver_reach_des)
         let startTime = new Date(startTimeStr)
@@ -173,7 +188,6 @@ export default {
           if (res.data.code == 20000) {
             console.log("测试")
             this.orderInfo = res.data.data[0]
-            console.log(this.orderInfo.car_id)
           } 
           else {
             console.log("查询失败")
@@ -246,6 +260,7 @@ export default {
                 _this.orderInfo.driver_get_img = []
               }
                 _this.orderInfo.driver_get_img.push({ url: downloadUrl + fileName + previewImage, name: "", thumb: downloadUrl + fileName + processImage })
+                console.log(_this.orderInfo.driver_get_img)
                 _this.orderInfo.driver_get_img = [..._this.orderInfo.driver_get_img]
             },
             fail(error) {

@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-14 11:20:54
+ * @LastEditTime: 2020-12-14 13:40:44
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -240,7 +240,7 @@
                       </div>
                     </van-col>
                     <van-col>
-                      <button class="step-common-btn" disabled="isGet">
+                      <button class="step-common-btn" :disabled="isGet">
                         完成清算
                       </button>
                     </van-col>
@@ -268,7 +268,7 @@
                           :file-list="orderInfo.driver_get_img"
                           :max-count="maxCount"
                           preview-size="50"
-                          :deletable="false"
+                          :deletable="isGetDeleted"
                           @afterRead="afterGetRead"
                           @delete="deleteGetImage"
                         />
