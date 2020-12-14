@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-14 15:05:43
+ * @LastEditTime: 2020-12-14 15:55:52
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -17,7 +17,7 @@
         }}</span>
       </div>
       <!-- 垃圾倾倒 -->
-      <div class="step-6" v-if="orderInfo.order_status == 5">
+      <div class="step-6" v-if="orderInfo.driver_reach_trash != null">
         <!-- top -->
         <van-row>
           <!-- left -->
@@ -89,14 +89,14 @@
         </van-row>
       </div>
       <!-- 垃圾运输 -->
-      <div class="step-6" v-if="orderInfo.driver_get_img != null">
+      <div class="step-6" v-if="orderInfo.order_status == 5">
         <!-- top -->
         <van-row>
           <!-- left -->
           <van-col span="5">
             <van-row>
-              <div class="step-common">2020/11/11</div>
-              <div class="step-common-1">14:32:23</div>
+              <div class="step-common">已用时</div>
+              <div class="step-common-1">{{ onGoingTimeGap }}</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>
@@ -120,7 +120,13 @@
                 <div class="step-common-title">垃圾运输中</div>
               </van-col>
               <van-col>
-                <button class="step-common-btn">到达清算点</button>
+                <button
+                  class="step-common-btn"
+                  :disabled="isReachTrashDes"
+                  @click="reachTrashDes"
+                >
+                  到达清算点
+                </button>
               </van-col>
             </van-row>
             <van-row>
@@ -131,7 +137,7 @@
       </div>
 
       <!-- 垃圾装车 -->
-      <div class="step-6" v-if="orderInfo.driver_reach_img != null">
+      <div class="step-6" v-if="orderInfo.driver_reach_time != null">
         <!-- top -->
         <van-row>
           <!-- left -->
@@ -294,7 +300,7 @@
         </van-row>
       </div>
       <!-- 前往目的地 -->
-      <div class="step-6" v-if="orderInfo.order_status == 4">
+      <div class="step-6" v-if="orderInfo.driver_reach_des != null">
         <!-- top -->
         <van-row>
           <!-- left -->

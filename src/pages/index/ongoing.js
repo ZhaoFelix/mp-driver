@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-14 15:06:35
+ * @LastEditTime: 2020-12-14 15:54:55
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -62,8 +62,12 @@ export default {
       },
       // 计算前往目的地花费的时间
       goDesTimeGap(){
-      return this.timeGap(this.orderInfo.driver_go_des)
+      return this.timeGap(this.orderInfo.driver_go_des,this.orderInfo.driver_reach_des != null ? this.orderInfo.driver_reach_des : new Date() )
       },
+      // 计算运输过程中的时间
+      onGoingTimeGap(){
+        return this.timeGap(this.orderInfo.driver_get_time,this.orderInfo.driver_reach_trash != null ? this.orderInfo.driver_reach_trash : new Date() )
+        },
       isReach(){
       return this.orderInfo.driver_reach_des !== null ? true : false
       },
@@ -152,12 +156,14 @@ export default {
         } else {
           return this.orderInfo.driver_get_img
         }
+      },
+      isReachTrashDes(){
+        return this.orderInfo.driver_reach_trash == null ? false : true
       }
     },
     methods: {
-      timeGap(startTimeStr){
-        let endTime = this.orderInfo.driver_reach_des === null ? 
-        new Date() : new Date(this.orderInfo.driver_reach_des)
+      timeGap(startTimeStr,endTimeStr){
+        let endTime = new Date(endTimeStr)
         let startTime = new Date(startTimeStr)
         return Math.floor((endTime - startTime) / 1000 / 60 /60) >= 1 
         ? Math.floor((endTime - startTime) / 1000 / 60 /60) + "小时"
@@ -400,6 +406,23 @@ export default {
       data:{
         orderId:this.orderInfo.order_id,
         getImageList:this.orderInfo.driver_get_img
+      }
+    }).then((res) => {
+      if (res.data.code == 20000) { 
+        _this.fetchData()
+      } else {
+        console.log("更新失败")
+      }
+    })
+  },
+  // 到达垃圾处理点
+  reachTrashDes(){
+    let _this = this
+    this.$wxRequest
+    .post({
+      url:'/Dmobile/order/update/reachdes',
+      data:{
+        orderId:this.orderInfo.order_id,
       }
     }).then((res) => {
       if (res.data.code == 20000) { 
