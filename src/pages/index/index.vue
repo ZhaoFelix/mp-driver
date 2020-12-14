@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-14 09:55:15
+ * @LastEditTime: 2020-12-14 11:20:54
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -203,7 +203,7 @@
         </van-row>
       </div>
       <!-- 垃圾清算 -->
-      <div class="step-6">
+      <div class="step-6" v-if="isReach">
         <!-- top -->
         <van-row>
           <!-- left -->
@@ -235,10 +235,14 @@
                   <van-row>
                     <van-col>
                       <div class="step-common-title">渣土清算</div>
-                      <div class="limit-common">装修面积：60平方米</div>
+                      <div class="limit-common">
+                        {{ "装修面积：" + orderInfo.order_size + "平方米" }}
+                      </div>
                     </van-col>
                     <van-col>
-                      <button class="step-common-btn">完成清算</button>
+                      <button class="step-common-btn" disabled="isGet">
+                        完成清算
+                      </button>
                     </van-col>
                   </van-row>
                 </van-col>
@@ -249,11 +253,11 @@
                   <div class="step-6-imgs">
                     <van-row>
                       <van-col span="12">
-                        <div class="limit-common limit-tip">倾倒拍照：</div>
+                        <div class="limit-common limit-tip">渣土拍照：</div>
                       </van-col>
                       <van-col offset="8" span="4">
                         <div class="limit-common limit-number">
-                          {{ fileList.length + "/" + maxCount }}
+                          {{ isGetLimit }}
                         </div>
                       </van-col>
                     </van-row>
@@ -261,10 +265,12 @@
                       <van-col span="24">
                         <div style="height: 8px"></div>
                         <van-uploader
-                          :file-list="fileList"
+                          :file-list="orderInfo.driver_get_img"
                           :max-count="maxCount"
                           preview-size="50"
                           :deletable="false"
+                          @afterRead="afterGetRead"
+                          @delete="deleteGetImage"
                         />
                       </van-col>
                     </van-row>

@@ -2,12 +2,14 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-14 09:56:01
+ * @LastEditTime: 2020-12-14 11:28:47
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
 
 import { mapState } from "vuex";
+import { uploadUrl, downloadUrl, processImage, previewImage } from "../../../config/options.js"
+let OSS = {}
 export default {
     data() {
       return {
@@ -33,7 +35,8 @@ export default {
         isLogin:false,// 是否登录
         orderInfo:{
           
-        }
+        },
+        OSS
       };
     },
     computed:{
@@ -50,14 +53,34 @@ export default {
       },
       isReach(){
        return this.orderInfo.driver_reach_des !== null ? true : false
+      },
+      // 是否可以进行清算
+      isGet(){
+        // if (JSON.parse(this.orderInfo.driver_get_img) === undefined){
+        //   return false
+        // } else if (JSON.parse(this.orderInfo.driver_get_img).length === 4 ) {
+        //     return false
+        // } else {
+        //   return true
+        // }
+        return true
+      },
+      isGetLimit(){
+        // console.log(this.orderInfo.driver_get_img)
+        return this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined ?  "0/" + this.maxCount :
+        JSON.parse(this.orderInfo.driver_get_img).length + "/" + this.maxCount
       }
     },
     methods: {
       timeGap(startTimeStr){
-        let endTime = new Date()
+        
+        let endTime = this.orderInfo.driver_reach_des === null ? 
+        new Date() : new Date(this.orderInfo.driver_reach_des)
         let startTime = new Date(startTimeStr)
         return Math.floor((endTime - startTime) / 1000 / 60 /60) >= 1 
-        ? Math.floor((endTime - startTime) / 1000 / 60 /60) + "小时" + Math.floor((endTime - startTime) / 1000 / 60) + "分钟" :
+        ? Math.floor((endTime - startTime) / 1000 / 60 /60) + "小时"
+        + (Math.floor((endTime - startTime) / 1000 / 60) 
+        - Math.floor((endTime - startTime) / 1000 / 60 /60) * 60) + "分钟" :
         Math.floor((endTime - startTime) / 1000 / 60) + "分钟"
       },
       bindGetUserInfo(e, id) {
@@ -190,7 +213,53 @@ export default {
             }
           })
         }
-      }
+      },
+      // 获取云对象存储的token
+      getOssToken(){
+        this.$wxRequest
+        .get({
+            url: "/public/ossToken/getOssToken",
+        })
+        .then((res) => {
+            if (res.data.code == 20000) {
+                this.OSS = res.data.data
+            }
+        });
+      },
+      afterGetRead(event) {
+        console.log("图片上传")
+        const { file } = event.mp.detail;
+        let fileName = "ningjin_dev/" + new Date().getTime() + ".png"
+        var _this = this
+        wx.uploadFile({
+            url: uploadUrl, // 接口地址
+            filePath: file.url,
+            name: "file",
+            formData: {
+                key: fileName,
+                policy: this.OSS.policy,
+                OSSAccessKeyId: this.OSS.OSSAccessKeyId,
+                signature: this.OSS.signature
+            },
+            success(res) {
+              if (_this.orderInfo.driver_get_img == undefined) {
+                _this.orderInfo.driver_get_img = []
+              }
+                _this.orderInfo.driver_get_img.push({ url: downloadUrl + fileName + previewImage, name: "", thumb: downloadUrl + fileName + processImage })
+                _this.orderInfo.driver_get_img = [..._this.orderInfo.driver_get_img]
+            },
+            fail(error) {
+                console.log(error)
+            }
+        });
+    },
+    // 删除图片
+    deleteGetImage(event) {
+        console.log(event.mp.detail.index)
+        this.orderInfo.driver_get_img.pop(this.orderInfo.driver_get_img[event.mp.detail.index])
+        this.orderInfo.driver_get_img = [...this.orderInfo.driver_get_img]
+    },
+      
     },
   
     mounted(){
@@ -200,7 +269,7 @@ export default {
         success(res) {
           // console.log(res);
           if (res.code) {
-            console.log(res);
+            // console.log(res);
             _this.$wxRequest
               .post({
                 url: "/Dmobile/wxauth/wxauth",
@@ -215,6 +284,7 @@ export default {
                   );
                   //根据openID判断用户是否是首次使用小程序
                   _this.getUserInfo();
+                  _this.getOssToken()
                 } else {
                   console.log("获取openId失败");
                 }
@@ -222,5 +292,6 @@ export default {
           }
         },
       });
+      
     }
   };
