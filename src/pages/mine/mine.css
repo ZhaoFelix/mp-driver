@@ -8,7 +8,7 @@ page {
   height: 100%;
 }
 .user-info {
-  height: 90px;
+  height: 70px;
   width: 100%;
   margin-top: 15px;
   background-color: white;
@@ -19,10 +19,17 @@ page {
   margin-top: 15px;
   background-color: white;
 }
+.no-login {
+  line-height: 170px;
+  width: 100%;
+  text-align: center;
+  font-size: 15px;
+  color: rgba(1, 1, 1, 0.6);
+}
 .user-nickname {
   margin-top: 5px;
   height: 30px;
-  line-height: 30px;
+  line-height: 60px;
 }
 .wechat {
   height: 30px;
