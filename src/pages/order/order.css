@@ -18,7 +18,7 @@ page {
 .v-line-span {
   width: 4px;
   height: 13px;
-  background-color: #3675ff;
+  background-color: #8b572a;
   position: absolute;
   line-height: 15px;
   text-align: center;
@@ -71,8 +71,8 @@ page {
 
 .driver-info {
   font-size: 12px;
-  background-color: #4a90e2;
-  color: white;
+  background-color: #d5a881;
+  color: #8b572a;
   text-align: center;
   margin: 10px 0;
   opacity: 0.75;

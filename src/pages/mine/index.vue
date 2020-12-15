@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-11 14:33:26
+ * @LastEditTime: 2020-12-15 14:52:53
  * @FilePath: /mp-driver/src/pages/mine/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -12,76 +12,43 @@
       <van-row>
         <van-col offset="1" span="6">
           <van-image
-            src="../../../static/images/user.png"
-            width="70"
-            radius="35px"
-            height="70px"
+            :src="avatar"
+            width="60"
+            radius="30px"
+            height="60px"
             fit="cover"
             @click="articleDetail"
           />
         </van-col>
         <van-col span="16">
-          <div class="user-nickname">老司机</div>
-          <div class="wechat">手机号</div>
+          <div class="user-nickname">{{ nickname }}</div>
         </van-col>
       </van-row>
     </div>
-    <div class="user-identer"></div>
-
-    <div class="info-table">
-      <van-cell
-        is-link
-        title="服务协议"
-        link-type="navigateTo"
-        url="../../pages/index/index"
-      />
+    <div class="user-identer">
+      <van-cell-group title="详细信息">
+        <van-cell title="司机姓名" :value="driverInfo.driver_name" />
+        <van-cell title="司机手机号" :value="driverInfo.driver_phone" />
+        <van-cell title="路线说明" :value="driverInfo.router_note" />
+      </van-cell-group>
     </div>
     <div class="info-table">
       <van-cell
         is-link
-        title="意见反馈"
+        v-for="(item, index) in tableList"
+        :key="index"
+        :title="item.title"
         link-type="navigateTo"
-        url="../../pages/index/index"
+        :url="item.url"
       />
     </div>
-    <div class="info-table">
-      <van-cell
-        is-link
-        title="联系客服"
-        link-type="navigateTo"
-        url="../../pages/index/index"
-      />
-    </div>
-
     <div class="version-info">v 2.3.1</div>
   </div>
 </template>
 
 <script>
-export default {
-  data() {
-    return {
-      tableList: [
-        {
-          title: "我的订单",
-          url: "/pages/orders/main",
-        },
-        {
-          title: "服务协议",
-          url: "/pages/protocol/main",
-        },
-        {
-          title: "分享",
-          url: "",
-        },
-        {
-          title: "意见反馈",
-          url: "/pages/feedback/main",
-        },
-      ],
-    };
-  },
-};
+import index from "./mine.js";
+export default index;
 </script>
 
 <style scoped>
