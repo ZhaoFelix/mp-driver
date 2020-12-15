@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-14 16:55:25
+ * @LastEditTime: 2020-12-15 09:22:50
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -283,7 +283,7 @@ export default {
         // TODO:待添加具体ID
         this.$wxRequest
         .get({
-          url:'/Dmobile/order/query',
+          url:'/Dmobile/order/query?userId='+this.userID,
         })
         .then((res) => {
           if (res.data.code == 20000) {
