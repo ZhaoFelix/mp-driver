@@ -2,13 +2,26 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-14 16:52:45
+ * @LastEditTime: 2020-12-16 08:59:38
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
 <template>
   <div class="main-container">
-    <div class="sub-container" v-if="isLogin">
+    <div v-if="!isLogin">
+      <div class="no-login">
+        <span> 登录后获取订单信息 </span>
+        <button
+          open-type="getUserInfo"
+          class="login-btn"
+          @getuserinfo="bindGetUserInfo($event)"
+        >
+          登录
+        </button>
+      </div>
+    </div>
+    <div class="sub-container" v-else-if="JSON.stringify(orderInfo) === '{}'">
+      <div>{{ orderInfo }}</div>
       <!-- 订单号 -->
       <div class="order-number">
         <span>订单号 </span>
@@ -462,18 +475,6 @@
             </van-row>
           </van-col>
         </van-row>
-      </div>
-    </div>
-    <div v-else>
-      <div class="no-login">
-        <span> 登录后获取订单信息 </span>
-        <button
-          open-type="getUserInfo"
-          class="login-btn"
-          @getuserinfo="bindGetUserInfo($event)"
-        >
-          登录
-        </button>
       </div>
     </div>
   </div>
