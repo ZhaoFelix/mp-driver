@@ -24,13 +24,11 @@
         >
       </van-col>
     </div>
-    <van-toast id="van-toast" />
   </div>
 </template>
 
 <script>
 import { mapState } from "vuex";
-import Toast from "@vant/weapp/dist/toast/toast";
 export default {
   data() {
     return {
@@ -74,7 +72,10 @@ export default {
     // 根据手机号进行身份认证
     estateVerify() {
       if (this.phoneNumber == "") {
-        Toast.fail("请输入手机号");
+        wx.showToast({
+          title: "请输入手机号",
+          icon: "none",
+        });
         return;
       }
       let _this = this;
@@ -89,9 +90,15 @@ export default {
         })
         .then((res) => {
           if (res.data.code == "20001") {
-            Toast.fail(res.data.message);
+            wx.showToast({
+              title: res.data.message,
+              icon: "none",
+            });
           } else if (res.data.code == "20000") {
-            Toast.success(res.data.message);
+            wx.showToast({
+              title: res.data.message,
+              icon: "none",
+            });
             let url = "../propInformation/main?phone=" + this.phoneNumber;
             mpvue.navigateTo({ url });
           }
