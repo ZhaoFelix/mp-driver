@@ -2,554 +2,627 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-15 14:15:01
+ * @LastEditTime: 2020-12-17 13:20:43
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
 
 import { mapState } from "vuex";
-import { uploadUrl, downloadUrl, processImage, previewImage } from "../../../config/options.js"
-let OSS = {}
+import {
+  uploadUrl,
+  downloadUrl,
+  processImage,
+  previewImage,
+} from "../../../config/options.js";
+let OSS = {};
 export default {
-    data() {
-      return {
-        maxCount: 4,
-        orderInfo:{},
-        OSS
-      };
+  data() {
+    return {
+      maxCount: 4,
+      orderInfo: {},
+      OSS,
+    };
+  },
+  computed: {
+    ...mapState(["isLogin", "openID", "userID"]),
+    // TODO:定义过滤器替换重复内容
+    place_date: function () {
+      return (this.orderInfo.user_place_order_time + "").slice(0, 10);
     },
-    computed:{
-      ...mapState(["isLogin","openID", "userID"]),
-      // TODO:定义过滤器替换重复内容
-      place_date:function(){
-        return (this.orderInfo.user_place_order_time + "").slice(0,10)
-      },
-      place_time:function(){
-        return (this.orderInfo.user_place_order_time + "").slice(11,19)
-      },
-      reach_date:function(){
-        return (this.orderInfo.driver_reach_time + "").slice(0,10)
-      },
-      reach_time:function(){
-        return (this.orderInfo.driver_reach_time + "").slice(11,19)
-      },
-      get_date:function(){
-        return (this.orderInfo.driver_get_time + "").slice(0,10)
-      },
-      get_time:function(){
-        return (this.orderInfo.driver_get_time + "").slice(11,19)
-      },
-      complete_date:function(){
-        return (this.orderInfo.driver_complete_time + "").slice(0,10)
-      },
-      complete_time:function(){
-        return (this.orderInfo.driver_complete_time + "").slice(11,19)
-      },
-      // 计算前往目的地花费的时间
-      goDesTimeGap(){
-      return this.timeGap(this.orderInfo.driver_go_des,this.orderInfo.driver_reach_des != null ? this.orderInfo.driver_reach_des : new Date() )
-      },
-      // 计算运输过程中的时间
-      onGoingTimeGap(){
-        return this.timeGap(this.orderInfo.driver_get_time,this.orderInfo.driver_reach_trash != null ? this.orderInfo.driver_reach_trash : new Date() )
-        },
-      isReach(){
-      return this.orderInfo.driver_reach_des !== null ? true : false
-      },
-      // 是否可以进行清算
-      isReach1(){
-        if (this.orderInfo.driver_reach_img === null || this.orderInfo.driver_reach_img === undefined) {
-          return   true
-        }
-        else if(this.orderInfo.driver_reach_img instanceof Array) {
-            return !(this.orderInfo.driver_reach_img.length == this.maxCount)
-        } else {
-          return true 
-        } 
-      },
-      // 是否装车完成
-      isGet(){
-        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
-          return   true
-        }
-        else if(this.orderInfo.driver_get_img instanceof Array) {
-            return !(this.orderInfo.driver_get_img.length == this.maxCount)
-        } else {
-          return true 
-        }
-      },
-      isComplete(){
-        if (this.orderInfo.driver_complete_img === null || this.orderInfo.driver_complete_img === undefined) {
-          return   true
-        }
-        else if(this.orderInfo.driver_complete_img instanceof Array) {
-            return !(this.orderInfo.driver_complete_img.length == this.maxCount)
-        } else {
-          return true 
-        }
-      },
-      isCompleteDeleted(){
-        if (this.orderInfo.driver_complete_img === null || this.orderInfo.driver_complete_img === undefined) {
-          return   false
-        }
-        else if(this.orderInfo.driver_complete_img instanceof Array) {
-            return true
-        } else {
-          return false 
-        } 
-      },
-      isReachDeleted(){
-        if (this.orderInfo.driver_reach_img === null || this.orderInfo.driver_reach_img === undefined) {
-          return   false
-        }
-        else if(this.orderInfo.driver_reach_img instanceof Array) {
-            return true
-        } else {
-          return false 
-        } 
-      },
-      isGetDeleted(){
-        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
-          return   false
-        }
-        else if(this.orderInfo.driver_get_img instanceof Array) {
-            return true
-        } else {
-          return false 
-        } 
-      },
-      isReachLimit(){
-        // console.log(this.orderInfo.driver_reach_img)
-        if (this.orderInfo.driver_reach_img === null || this.orderInfo.driver_reach_img === undefined) {
-          return    "0/" + this.maxCount 
-        }
-        else if(this.orderInfo.driver_reach_img instanceof Array) {
-            return this.orderInfo.driver_reach_img.length + "/" + this.maxCount
-        } else {
-          return JSON.parse(this.orderInfo.driver_reach_img).length + "/" + this.maxCount
-        }
-      },
-      isGetLimit(){
-        // console.log(this.orderInfo.driver_reach_img)
-        if (this.orderInfo.driver_get_img === null || this.orderInfo.driver_get_img === undefined) {
-          return    "0/" + this.maxCount 
-        }
-        else if(this.orderInfo.driver_get_img instanceof Array) {
-            return this.orderInfo.driver_get_img.length + "/" + this.maxCount
-        } else {
-          return JSON.parse(this.orderInfo.driver_get_img).length + "/" + this.maxCount
-        }
-      },
-      isCompleteLimit(){
-        // console.log(this.orderInfo.driver_reach_img)
-        if (this.orderInfo.driver_complete_img === null || this.orderInfo.driver_complete_img === undefined) {
-          return    "0/" + this.maxCount 
-        }
-        else if(this.orderInfo.driver_complete_img instanceof Array) {
-            return this.orderInfo.driver_complete_img.length + "/" + this.maxCount
-        } else {
-          return JSON.parse(this.orderInfo.driver_complete_img).length + "/" + this.maxCount
-        }
-      },
-      driverReachImages(){
-        if (this.orderInfo.driver_reach_img != null) {
-          if (this.orderInfo.driver_reach_img instanceof Array) {
-              return this.orderInfo.driver_reach_img
-          } else {
-            return JSON.parse(this.orderInfo.driver_reach_img)
-          }
-        } else {
-          return this.orderInfo.driver_reach_img
-        }
-      },
-      driverGetImages(){
-        if (this.orderInfo.driver_get_img != null) {
-          if (this.orderInfo.driver_get_img instanceof Array) {
-              return this.orderInfo.driver_get_img
-          } else {
-            return JSON.parse(this.orderInfo.driver_get_img)
-          }
-        } else {
-          return this.orderInfo.driver_get_img
-        }
-      },
-      driverCompleteImages(){
-        if (this.orderInfo.driver_complete_img != null) {
-          if (this.orderInfo.driver_complete_img instanceof Array) {
-              return this.orderInfo.driver_complete_img
-          } else {
-            return JSON.parse(this.orderInfo.driver_complete_img)
-          }
-        } else {
-          return this.orderInfo.driver_complete_img
-        }
-      },
-      
-      isReachTrashDes(){
-        return this.orderInfo.driver_reach_trash == null ? false : true
+    place_time: function () {
+      return (this.orderInfo.user_place_order_time + "").slice(11, 19);
+    },
+    reach_date: function () {
+      return (this.orderInfo.driver_reach_time + "").slice(0, 10);
+    },
+    reach_time: function () {
+      return (this.orderInfo.driver_reach_time + "").slice(11, 19);
+    },
+    get_date: function () {
+      return (this.orderInfo.driver_get_time + "").slice(0, 10);
+    },
+    get_time: function () {
+      return (this.orderInfo.driver_get_time + "").slice(11, 19);
+    },
+    complete_date: function () {
+      return (this.orderInfo.driver_complete_time + "").slice(0, 10);
+    },
+    complete_time: function () {
+      return (this.orderInfo.driver_complete_time + "").slice(11, 19);
+    },
+    // 计算前往目的地花费的时间
+    goDesTimeGap() {
+      return this.timeGap(
+        this.orderInfo.driver_go_des,
+        this.orderInfo.driver_reach_des != null
+          ? this.orderInfo.driver_reach_des
+          : new Date()
+      );
+    },
+    isShow() {
+      if (
+        this.orderInfo === {} ||
+        this.orderInfo == undefined ||
+        JSON.stringify(this.orderInfo) == "{}"
+      ) {
+        return false;
+      } else {
+        return true;
       }
     },
-    methods: {
-      timeGap(startTimeStr,endTimeStr){
-        let endTime = new Date(endTimeStr)
-        let startTime = new Date(startTimeStr)
-        return Math.floor((endTime - startTime) / 1000 / 60 /60) >= 1 
-        ? Math.floor((endTime - startTime) / 1000 / 60 /60) + "小时"
-        + (Math.floor((endTime - startTime) / 1000 / 60) 
-        - Math.floor((endTime - startTime) / 1000 / 60 /60) * 60) + "分钟" :
-        Math.floor((endTime - startTime) / 1000 / 60) + "分钟"
-      },
-      bindGetUserInfo(e, id) {
-        console.log("测试")
-        this.openID = this.$store.state.openID;
-        
-        if (this.$store.state.isLogin) {
-          return;
-        }
-        if (e.mp.detail.userInfo) {
-          let { userInfo } = e.mp.detail;
-          let data = {
-            user_type: id,
-            openId: this.openID,
-            avatarUrl: userInfo.avatarUrl,
-            gender: userInfo.gender,
-            nickName: userInfo.nickName,
-            province: userInfo.province,
-            country: userInfo.country,
-          };
-          this.$store.commit("setNickname",userInfo.nickName)
-          this.$store.commit("setAvatar",userInfo.avatarUrl)
-          this.$wxRequest
-            .post({
-              url: "/Dmobile/wxauth/wechat",
-              data: data,
-            })
-            .then((res) => {
-              if (res.data.code == 20000) {
-                console.log(res.data.data[0]);
-                this.$store.commit("setUserID",res.data.data[0].user_id)
-                this.$store.commit("changeLogin");
-                this.isLogin = true
-                // 前往认证
-                  const url = "../checkPage/main";
-                  mpvue.navigateTo({ url });
-              } else {
-                console.log("获取失败");
-              }
-            });
+    // 计算运输过程中的时间
+    onGoingTimeGap() {
+      return this.timeGap(
+        this.orderInfo.driver_get_time,
+        this.orderInfo.driver_reach_trash != null
+          ? this.orderInfo.driver_reach_trash
+          : new Date()
+      );
+    },
+    isReach() {
+      return this.orderInfo.driver_reach_des !== null ? true : false;
+    },
+    // 是否可以进行清算
+    isReach1() {
+      if (
+        this.orderInfo.driver_reach_img === null ||
+        this.orderInfo.driver_reach_img === undefined
+      ) {
+        return true;
+      } else if (this.orderInfo.driver_reach_img instanceof Array) {
+        return !(this.orderInfo.driver_reach_img.length == this.maxCount);
+      } else {
+        return true;
+      }
+    },
+    // 是否装车完成
+    isGet() {
+      if (
+        this.orderInfo.driver_get_img === null ||
+        this.orderInfo.driver_get_img === undefined
+      ) {
+        return true;
+      } else if (this.orderInfo.driver_get_img instanceof Array) {
+        return !(this.orderInfo.driver_get_img.length == this.maxCount);
+      } else {
+        return true;
+      }
+    },
+    isComplete() {
+      if (
+        this.orderInfo.driver_complete_img === null ||
+        this.orderInfo.driver_complete_img === undefined
+      ) {
+        return true;
+      } else if (this.orderInfo.driver_complete_img instanceof Array) {
+        return !(this.orderInfo.driver_complete_img.length == this.maxCount);
+      } else {
+        return true;
+      }
+    },
+    isCompleteDeleted() {
+      if (
+        this.orderInfo.driver_complete_img === null ||
+        this.orderInfo.driver_complete_img === undefined
+      ) {
+        return false;
+      } else if (this.orderInfo.driver_complete_img instanceof Array) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isReachDeleted() {
+      if (
+        this.orderInfo.driver_reach_img === null ||
+        this.orderInfo.driver_reach_img === undefined
+      ) {
+        return false;
+      } else if (this.orderInfo.driver_reach_img instanceof Array) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isGetDeleted() {
+      if (
+        this.orderInfo.driver_get_img === null ||
+        this.orderInfo.driver_get_img === undefined
+      ) {
+        return false;
+      } else if (this.orderInfo.driver_get_img instanceof Array) {
+        return true;
+      } else {
+        return false;
+      }
+    },
+    isReachLimit() {
+      // console.log(this.orderInfo.driver_reach_img)
+      if (
+        this.orderInfo.driver_reach_img === null ||
+        this.orderInfo.driver_reach_img === undefined
+      ) {
+        return "0/" + this.maxCount;
+      } else if (this.orderInfo.driver_reach_img instanceof Array) {
+        return this.orderInfo.driver_reach_img.length + "/" + this.maxCount;
+      } else {
+        return (
+          JSON.parse(this.orderInfo.driver_reach_img).length +
+          "/" +
+          this.maxCount
+        );
+      }
+    },
+    isGetLimit() {
+      // console.log(this.orderInfo.driver_reach_img)
+      if (
+        this.orderInfo.driver_get_img === null ||
+        this.orderInfo.driver_get_img === undefined
+      ) {
+        return "0/" + this.maxCount;
+      } else if (this.orderInfo.driver_get_img instanceof Array) {
+        return this.orderInfo.driver_get_img.length + "/" + this.maxCount;
+      } else {
+        return (
+          JSON.parse(this.orderInfo.driver_get_img).length + "/" + this.maxCount
+        );
+      }
+    },
+    isCompleteLimit() {
+      // console.log(this.orderInfo.driver_reach_img)
+      if (
+        this.orderInfo.driver_complete_img === null ||
+        this.orderInfo.driver_complete_img === undefined
+      ) {
+        return "0/" + this.maxCount;
+      } else if (this.orderInfo.driver_complete_img instanceof Array) {
+        return this.orderInfo.driver_complete_img.length + "/" + this.maxCount;
+      } else {
+        return (
+          JSON.parse(this.orderInfo.driver_complete_img).length +
+          "/" +
+          this.maxCount
+        );
+      }
+    },
+    driverReachImages() {
+      if (this.orderInfo.driver_reach_img != null) {
+        if (this.orderInfo.driver_reach_img instanceof Array) {
+          return this.orderInfo.driver_reach_img;
         } else {
-          console.log("用户点击了拒绝按钮");
+          return JSON.parse(this.orderInfo.driver_reach_img);
         }
-      },
-      getUserInfo() {
-        this.openID = this.$store.state.openID;
+      } else {
+        return this.orderInfo.driver_reach_img;
+      }
+    },
+    driverGetImages() {
+      if (this.orderInfo.driver_get_img != null) {
+        if (this.orderInfo.driver_get_img instanceof Array) {
+          return this.orderInfo.driver_get_img;
+        } else {
+          return JSON.parse(this.orderInfo.driver_get_img);
+        }
+      } else {
+        return this.orderInfo.driver_get_img;
+      }
+    },
+    driverCompleteImages() {
+      if (this.orderInfo.driver_complete_img != null) {
+        if (this.orderInfo.driver_complete_img instanceof Array) {
+          return this.orderInfo.driver_complete_img;
+        } else {
+          return JSON.parse(this.orderInfo.driver_complete_img);
+        }
+      } else {
+        return this.orderInfo.driver_complete_img;
+      }
+    },
+
+    isReachTrashDes() {
+      return this.orderInfo.driver_reach_trash == null ? false : true;
+    },
+  },
+  methods: {
+    timeGap(startTimeStr, endTimeStr) {
+      let endTime = new Date(endTimeStr);
+      let startTime = new Date(startTimeStr);
+      return Math.floor((endTime - startTime) / 1000 / 60 / 60) >= 1
+        ? Math.floor((endTime - startTime) / 1000 / 60 / 60) +
+            "小时" +
+            (Math.floor((endTime - startTime) / 1000 / 60) -
+              Math.floor((endTime - startTime) / 1000 / 60 / 60) * 60) +
+            "分钟"
+        : Math.floor((endTime - startTime) / 1000 / 60) + "分钟";
+    },
+    bindGetUserInfo(e, id) {
+      this.openID = this.$store.state.openID;
+
+      if (this.$store.state.isLogin) {
+        return;
+      }
+      if (e.mp.detail.userInfo) {
+        let { userInfo } = e.mp.detail;
+        let data = {
+          user_type: id,
+          openId: this.openID,
+          avatarUrl: userInfo.avatarUrl,
+          gender: userInfo.gender,
+          nickName: userInfo.nickName,
+          province: userInfo.province,
+          country: userInfo.country,
+        };
+        this.$store.commit("setNickname", userInfo.nickName);
+        this.$store.commit("setAvatar", userInfo.avatarUrl);
         this.$wxRequest
           .post({
-            url: "/Dmobile/wxauth/getUserInfo",
-            data: { openId: this.openID },
+            url: "/Dmobile/wxauth/wechat",
+            data: data,
           })
           .then((res) => {
             if (res.data.code == 20000) {
-              let dataArr = res.data.data;
-              console.log(dataArr)
-              if (dataArr.length == 0) {
-                return
-              }
-                // 判断是否已认证
-              else  if (dataArr[0].user_type === null || dataArr[0].user_type == 0) {
-                  //  存储用户ID和用户类型
-                  this.$store.commit("setUserID",dataArr[0].user_id)
-                  this.$store.commit("setUserType",dataArr[0].user_type)
-                  this.$store.commit("changeLogin")
-                  this.$store.commit("setNickname",dataArr[0].wechat_nickname)
-                  this.$store.commit("setAvatar",dataArr[0].wechat_avatar)
-                  // wechat_nickname,wechat_avatar
-                  this.isLogin = true
-                  // 未认证，前往认证页面
-                  const url = "../checkPage/main";
-                  mpvue.navigateTo({ url });
-                } else {
-                    //  存储用户ID和用户类型
-                  this.$store.commit("setUserID",dataArr[0].user_id)
-                  this.$store.commit("setUserType",dataArr[0].user_type)
-                  this.$store.commit("changeLogin")
-                  this.$store.commit("setNickname",dataArr[0].wechat_nickname)
-                  this.$store.commit("setAvatar",dataArr[0].wechat_avatar)
-                  this.isLogin = true
-                  console.log(this.$store.state.isLogin)
-                  // 获取订单信息
-                  this.fetchData()
-                }
+              this.$store.commit("setUserID", res.data.data[0].user_id);
+              this.$store.commit("changeLogin");
+              this.isLogin = true;
+              // 前往认证
+              const url = "../checkPage/main";
+              mpvue.navigateTo({ url });
             } else {
-              console.log("查询失败", res.data.data);
+              console.log("获取失败");
             }
           });
-      },
-       // 获取实时订单
-      fetchData(){
-        // TODO:待添加具体ID
-        this.$wxRequest
-        .get({
-          url:'/Dmobile/order/query?userId='+this.userID,
+      } else {
+        console.log("用户点击了拒绝按钮");
+      }
+    },
+    getUserInfo() {
+      this.openID = this.$store.state.openID;
+      this.$wxRequest
+        .post({
+          url: "/Dmobile/wxauth/getUserInfo",
+          data: { openId: this.openID },
         })
         .then((res) => {
           if (res.data.code == 20000) {
-            console.log("测试")
-            this.orderInfo = res.data.data[0]
-          } 
-          else {
-            console.log("查询失败")
-          }
-        })
-      },
-      // 前往目的地
-      goDestination(){
-        let order_id = this.orderInfo.order_id
-        if (order_id != undefined) {
-          this.$wxRequest
-          .get({
-            url:'/Dmobile/order/update/status4?orderId='+order_id,
-          })
-          .then((res) => {
-            if (res.data.code == 20000){
-                this.fetchData()
-            } else {
+            let dataArr = res.data.data;
 
+            if (dataArr.length == 0) {
+              return;
             }
-          })
-        }
-      },
-      // 到达目的地
-      reachDestination(){
-        let order_id = this.orderInfo.order_id
-        if (order_id != undefined) {
-          this.$wxRequest
-          .get({
-            url:'/Dmobile/order/update/reachDes?orderId='+order_id,
-          })
-          .then((res) => {
-            if (res.data.code == 20000){
-                this.fetchData()
+            // 判断是否已认证
+            else if (
+              dataArr[0].user_type === null ||
+              dataArr[0].user_type == 0
+            ) {
+              //  存储用户ID和用户类型
+              this.$store.commit("setUserID", dataArr[0].user_id);
+              this.$store.commit("setUserType", dataArr[0].user_type);
+              this.$store.commit("changeLogin");
+              this.$store.commit("setNickname", dataArr[0].wechat_nickname);
+              this.$store.commit("setAvatar", dataArr[0].wechat_avatar);
+              // wechat_nickname,wechat_avatar
+              this.isLogin = true;
+              // 未认证，前往认证页面
+              const url = "../checkPage/main";
+              mpvue.navigateTo({ url });
             } else {
-              
+              //  存储用户ID和用户类型
+              this.$store.commit("setUserID", dataArr[0].user_id);
+              this.$store.commit("setUserType", dataArr[0].user_type);
+              this.$store.commit("changeLogin");
+              this.$store.commit("setNickname", dataArr[0].wechat_nickname);
+              this.$store.commit("setAvatar", dataArr[0].wechat_avatar);
+              this.isLogin = true;
+
+              // 获取订单信息
+              this.fetchData();
             }
-          })
-        }
-      },
-      // 获取云对象存储的token
-      getOssToken(){
-        this.$wxRequest
+          } else {
+            console.log("查询失败", res.data.data);
+          }
+        });
+    },
+    // 获取实时订单
+    fetchData() {
+      this.$wxRequest
         .get({
-            url: "/public/ossToken/getOssToken",
+          url: "/Dmobile/order/query?userId=" + this.userID,
         })
         .then((res) => {
-            if (res.data.code == 20000) {
-                this.OSS = res.data.data
-            }
-        });
-      },
-      afterReachRead(event) {
-        console.log("图片上传")
-        const { file } = event.mp.detail;
-        let fileName = "ningjin_dev/" + new Date().getTime() + ".png"
-        var _this = this
-        wx.uploadFile({
-            url: uploadUrl, // 接口地址
-            filePath: file.url,
-            name: "file",
-            formData: {
-                key: fileName,
-                policy: this.OSS.policy,
-                OSSAccessKeyId: this.OSS.OSSAccessKeyId,
-                signature: this.OSS.signature
-            },
-            success(res) {
-              if (_this.orderInfo.driver_reach_img == undefined) {
-                _this.orderInfo.driver_reach_img = []
-              }
-                _this.orderInfo.driver_reach_img.push({ url: downloadUrl + fileName + previewImage, name: "", thumb: downloadUrl + fileName + processImage })
-                console.log(_this.orderInfo.driver_reach_img)
-                _this.orderInfo.driver_reach_img = [..._this.orderInfo.driver_reach_img]
-            },
-            fail(error) {
-                console.log(error)
-            }
-        });
-    },
-    // 删除图片
-    deleteReachImage(event) {
-        console.log(event.mp.detail.index)
-        this.orderInfo.driver_reach_img.pop(this.orderInfo.driver_reach_img[event.mp.detail.index])
-        this.orderInfo.driver_reach_img = [...this.orderInfo.driver_reach_img]
-    },
-    reachImages(){
-      let _this = this
-      this.$wxRequest
-      .post({
-        url:'/Dmobile/order/update/reachimage',
-        data:{
-          orderId:this.orderInfo.order_id,
-          reachImageList:this.orderInfo.driver_reach_img
-        }
-      }).then((res) => {
-        if (res.data.code == 20000) { 
-          _this.fetchData()
-        } else {
-          console.log("更新失败")
-        }
-      })
-    },
-    // 装车完成的函数
-    afterGetRead(event) {
-      console.log("图片上传")
-      const { file } = event.mp.detail;
-      let fileName = "ningjin_dev/" + new Date().getTime() + ".png"
-      var _this = this
-      wx.uploadFile({
-          url: uploadUrl, // 接口地址
-          filePath: file.url,
-          name: "file",
-          formData: {
-              key: fileName,
-              policy: this.OSS.policy,
-              OSSAccessKeyId: this.OSS.OSSAccessKeyId,
-              signature: this.OSS.signature
-          },
-          success(res) {
-            if (_this.orderInfo.driver_get_img == undefined) {
-              _this.orderInfo.driver_get_img = []
-            }
-              _this.orderInfo.driver_get_img.push({ url: downloadUrl + fileName + previewImage, name: "", thumb: downloadUrl + fileName + processImage })
-              console.log(_this.orderInfo.driver_get_img)
-              _this.orderInfo.driver_get_img = [..._this.orderInfo.driver_get_img]
-          },
-          fail(error) {
-              console.log(error)
+          if (res.data.code == 20000) {
+            this.orderInfo = res.data.data[0];
+          } else {
+            console.log("查询失败");
           }
-      });
-  },
-  // 删除图片
-  deleteGetImage(event) {
-      this.orderInfo.driver_get_img.pop(this.orderInfo.driver_get_img[event.mp.detail.index])
-      this.orderInfo.driver_get_img = [...this.orderInfo.driver_get_img]
-  },
-  getImages(){
-    let _this = this
-    this.$wxRequest
-    .post({
-      url:'/Dmobile/order/update/getimage',
-      data:{
-        orderId:this.orderInfo.order_id,
-        getImageList:this.orderInfo.driver_get_img
+        });
+    },
+    // 前往目的地
+    goDestination() {
+      let order_id = this.orderInfo.order_id;
+      if (order_id != undefined) {
+        this.$wxRequest
+          .get({
+            url: "/Dmobile/order/update/status4?orderId=" + order_id,
+          })
+          .then((res) => {
+            if (res.data.code == 20000) {
+              this.fetchData();
+            } else {
+            }
+          });
       }
-    }).then((res) => {
-      if (res.data.code == 20000) { 
-        _this.fetchData()
-      } else {
-        console.log("更新失败")
+    },
+    // 到达目的地
+    reachDestination() {
+      let order_id = this.orderInfo.order_id;
+      if (order_id != undefined) {
+        this.$wxRequest
+          .get({
+            url: "/Dmobile/order/update/reachDes?orderId=" + order_id,
+          })
+          .then((res) => {
+            if (res.data.code == 20000) {
+              this.fetchData();
+            } else {
+            }
+          });
       }
-    })
-  },
-  // 到达垃圾处理点
-  reachTrashDes(){
-    let _this = this
-    this.$wxRequest
-    .post({
-      url:'/Dmobile/order/update/reachdes',
-      data:{
-        orderId:this.orderInfo.order_id,
-      }
-    }).then((res) => {
-      if (res.data.code == 20000) { 
-        _this.fetchData()
-      } else {
-        console.log("更新失败")
-      }
-    })
-  } ,
-
-  // 订单完成
-  afterCompleteRead(event) {
-    console.log("图片上传")
-    const { file } = event.mp.detail;
-    let fileName = "ningjin_dev/" + new Date().getTime() + ".png"
-    var _this = this
-    wx.uploadFile({
+    },
+    // 获取云对象存储的token
+    getOssToken() {
+      this.$wxRequest
+        .get({
+          url: "/public/ossToken/getOssToken",
+        })
+        .then((res) => {
+          if (res.data.code == 20000) {
+            this.OSS = res.data.data;
+          }
+        });
+    },
+    afterReachRead(event) {
+      const { file } = event.mp.detail;
+      let fileName = "ningjin_dev/" + new Date().getTime() + ".png";
+      var _this = this;
+      wx.uploadFile({
         url: uploadUrl, // 接口地址
         filePath: file.url,
         name: "file",
         formData: {
-            key: fileName,
-            policy: this.OSS.policy,
-            OSSAccessKeyId: this.OSS.OSSAccessKeyId,
-            signature: this.OSS.signature
+          key: fileName,
+          policy: this.OSS.policy,
+          OSSAccessKeyId: this.OSS.OSSAccessKeyId,
+          signature: this.OSS.signature,
+        },
+        success(res) {
+          if (_this.orderInfo.driver_reach_img == undefined) {
+            _this.orderInfo.driver_reach_img = [];
+          }
+          _this.orderInfo.driver_reach_img.push({
+            url: downloadUrl + fileName + previewImage,
+            name: "",
+            thumb: downloadUrl + fileName + processImage,
+          });
+
+          _this.orderInfo.driver_reach_img = [
+            ..._this.orderInfo.driver_reach_img,
+          ];
+        },
+        fail(error) {
+          console.log(error);
+        },
+      });
+    },
+    // 删除图片
+    deleteReachImage(event) {
+      this.orderInfo.driver_reach_img.pop(
+        this.orderInfo.driver_reach_img[event.mp.detail.index]
+      );
+      this.orderInfo.driver_reach_img = [...this.orderInfo.driver_reach_img];
+    },
+    reachImages() {
+      let _this = this;
+      this.$wxRequest
+        .post({
+          url: "/Dmobile/order/update/reachimage",
+          data: {
+            orderId: this.orderInfo.order_id,
+            reachImageList: this.orderInfo.driver_reach_img,
+          },
+        })
+        .then((res) => {
+          if (res.data.code == 20000) {
+            _this.fetchData();
+          } else {
+            console.log("更新失败");
+          }
+        });
+    },
+    // 装车完成的函数
+    afterGetRead(event) {
+      const { file } = event.mp.detail;
+      let fileName = "ningjin_dev/" + new Date().getTime() + ".png";
+      var _this = this;
+      wx.uploadFile({
+        url: uploadUrl, // 接口地址
+        filePath: file.url,
+        name: "file",
+        formData: {
+          key: fileName,
+          policy: this.OSS.policy,
+          OSSAccessKeyId: this.OSS.OSSAccessKeyId,
+          signature: this.OSS.signature,
+        },
+        success(res) {
+          if (_this.orderInfo.driver_get_img == undefined) {
+            _this.orderInfo.driver_get_img = [];
+          }
+          _this.orderInfo.driver_get_img.push({
+            url: downloadUrl + fileName + previewImage,
+            name: "",
+            thumb: downloadUrl + fileName + processImage,
+          });
+          _this.orderInfo.driver_get_img = [..._this.orderInfo.driver_get_img];
+        },
+        fail(error) {
+          console.log(error);
+        },
+      });
+    },
+    // 删除图片
+    deleteGetImage(event) {
+      this.orderInfo.driver_get_img.pop(
+        this.orderInfo.driver_get_img[event.mp.detail.index]
+      );
+      this.orderInfo.driver_get_img = [...this.orderInfo.driver_get_img];
+    },
+    getImages() {
+      let _this = this;
+      this.$wxRequest
+        .post({
+          url: "/Dmobile/order/update/getimage",
+          data: {
+            orderId: this.orderInfo.order_id,
+            getImageList: this.orderInfo.driver_get_img,
+          },
+        })
+        .then((res) => {
+          if (res.data.code == 20000) {
+            _this.fetchData();
+          } else {
+            console.log("更新失败");
+          }
+        });
+    },
+    // 到达垃圾处理点
+    reachTrashDes() {
+      let _this = this;
+      this.$wxRequest
+        .post({
+          url: "/Dmobile/order/update/reachdes",
+          data: {
+            orderId: this.orderInfo.order_id,
+          },
+        })
+        .then((res) => {
+          if (res.data.code == 20000) {
+            _this.fetchData();
+          } else {
+            console.log("更新失败");
+          }
+        });
+    },
+
+    // 订单完成
+    afterCompleteRead(event) {
+      console.log("图片上传");
+      const { file } = event.mp.detail;
+      let fileName = "ningjin_dev/" + new Date().getTime() + ".png";
+      var _this = this;
+      wx.uploadFile({
+        url: uploadUrl, // 接口地址
+        filePath: file.url,
+        name: "file",
+        formData: {
+          key: fileName,
+          policy: this.OSS.policy,
+          OSSAccessKeyId: this.OSS.OSSAccessKeyId,
+          signature: this.OSS.signature,
         },
         success(res) {
           if (_this.orderInfo.driver_complete_img == undefined) {
-            _this.orderInfo.driver_complete_img = []
+            _this.orderInfo.driver_complete_img = [];
           }
-            _this.orderInfo.driver_complete_img.push({ url: downloadUrl + fileName + previewImage, name: "", thumb: downloadUrl + fileName + processImage })
-            console.log(_this.orderInfo.driver_complete_img)
-            _this.orderInfo.driver_complete_img = [..._this.orderInfo.driver_complete_img]
+          _this.orderInfo.driver_complete_img.push({
+            url: downloadUrl + fileName + previewImage,
+            name: "",
+            thumb: downloadUrl + fileName + processImage,
+          });
+
+          _this.orderInfo.driver_complete_img = [
+            ..._this.orderInfo.driver_complete_img,
+          ];
         },
         fail(error) {
-            console.log(error)
-        }
-    });
-},
-// 删除图片
-  deleteCompleteImage(event) {
-      this.orderInfo.driver_complete_img.pop(this.orderInfo.driver_get_img[event.mp.detail.index])
-      this.orderInfo.driver_complete_img = [...this.orderInfo.driver_complete_img]
-  },
-  completeOrder(){
-    let _this = this
-      this.$wxRequest
-      .post({
-        url:'/Dmobile/order/update/complete',
-        data:{
-          orderId:this.orderInfo.order_id,
-          completeImageList:this.orderInfo.driver_complete_img
-        }
-      }).then((res) => {
-        if (res.data.code == 20000) { 
-          _this.fetchData()
-        } else {
-          console.log("更新失败")
-        }
-      })
-  }
-  },
-    mounted(){
-      var _this = this;
-      // 登录获取openID
-      wx.login({
-        success(res) {
-          // console.log(res);
-          if (res.code) {
-            // console.log(res);
-            _this.$wxRequest
-              .post({
-                url: "/Dmobile/wxauth/wxauth",
-                data: {
-                  code: res.code,
-                },
-              })
-              .then((res) => {
-                if (res.data.code == 20000) {
-                  _this.$store.commit("setOpenID", 
-                  res.data.data.openid,
-                  );
-                  //根据openID判断用户是否是首次使用小程序
-                  _this.getUserInfo();
-                  _this.getOssToken()
-                } else {
-                  console.log("获取openId失败");
-                }
-              });
-          }
+          console.log(error);
         },
       });
-      
-    }
-  };
+    },
+    // 删除图片
+    deleteCompleteImage(event) {
+      this.orderInfo.driver_complete_img.pop(
+        this.orderInfo.driver_get_img[event.mp.detail.index]
+      );
+      this.orderInfo.driver_complete_img = [
+        ...this.orderInfo.driver_complete_img,
+      ];
+    },
+    completeOrder() {
+      let _this = this;
+      this.$wxRequest
+        .post({
+          url: "/Dmobile/order/update/complete",
+          data: {
+            orderId: this.orderInfo.order_id,
+            completeImageList: this.orderInfo.driver_complete_img,
+          },
+        })
+        .then((res) => {
+          if (res.data.code == 20000) {
+            _this.fetchData();
+          } else {
+            console.log("更新失败");
+          }
+        });
+    },
+  },
+  mounted() {
+    var _this = this;
+    // 登录获取openID
+    wx.login({
+      success(res) {
+        // console.log(res);
+        if (res.code) {
+          // console.log(res);
+          _this.$wxRequest
+            .post({
+              url: "/Dmobile/wxauth/wxauth",
+              data: {
+                code: res.code,
+              },
+            })
+            .then((res) => {
+              if (res.data.code == 20000) {
+                _this.$store.commit("setOpenID", res.data.data.openid);
+                //根据openID判断用户是否是首次使用小程序
+                _this.getUserInfo();
+                _this.getOssToken();
+              } else {
+                console.log("获取openId失败");
+              }
+            });
+        }
+      },
+    });
+  },
+};

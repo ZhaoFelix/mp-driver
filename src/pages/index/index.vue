@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-16 08:59:38
+ * @LastEditTime: 2020-12-17 13:18:07
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -20,8 +20,7 @@
         </button>
       </div>
     </div>
-    <div class="sub-container" v-else-if="JSON.stringify(orderInfo) === '{}'">
-      <div>{{ orderInfo }}</div>
+    <div class="sub-container" v-else-if="isShow">
       <!-- 订单号 -->
       <div class="order-number">
         <span>订单号 </span>
@@ -273,7 +272,7 @@
                     <van-col>
                       <div class="step-common-title">渣土清算</div>
                       <div class="limit-common">
-                        {{ "装修面积：" + orderInfo.order_size + "平方米" }}
+                        {{ "装修面积：" + orderInfo.order_size + " m²" }}
                       </div>
                     </van-col>
                     <van-col>
@@ -323,7 +322,7 @@
         </van-row>
       </div>
       <!-- 前往目的地 -->
-      <div class="step-6" v-if="orderInfo.driver_reach_des != null">
+      <div class="step-6" v-if="orderInfo.driver_go_des != null">
         <!-- top -->
         <van-row>
           <!-- left -->
@@ -457,8 +456,8 @@
                       <div class="step-common-title">建筑面积</div>
                       <div class="limit-common">
                         <van-row>
-                          <van-col span="7">
-                            <span>{{ orderInfo.order_size + "平方米" }}</span>
+                          <van-col span="5">
+                            <span>{{ orderInfo.order_size + " m²" }}</span>
                           </van-col>
                           <van-col>
                             <span>&nbsp;预约时间：</span>
@@ -476,6 +475,9 @@
           </van-col>
         </van-row>
       </div>
+    </div>
+    <div v-else>
+      <span></span>
     </div>
   </div>
 </template>
