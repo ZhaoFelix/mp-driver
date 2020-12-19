@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:58:34
- * @LastEditTime: 2020-12-13 20:17:06
+ * @LastEditTime: 2020-12-19 17:26:03
  * @FilePath: /mp-driver/src/pages/propInformation/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -41,7 +41,6 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import Toast from "@vant/weapp/dist/toast/toast";
 export default {
   data() {
     return {
@@ -64,12 +63,18 @@ export default {
         })
         .then((res) => {
           if (res.data.code == "20000") {
-            Toast.success("认证成功");
+            wx.showToast({
+              title: "认证成功",
+              icon: "none",
+            });
             //  认证成功，返回首页
             let url = "../index/main";
             mpvue.switchTab({ url });
           } else {
-            Toast.fail(res.data.messgae);
+            wx.showToast({
+              title: res.data.message,
+              icon: "none",
+            });
           }
         });
     },
