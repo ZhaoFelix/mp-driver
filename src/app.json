@@ -3,8 +3,8 @@
         "pages/index/main",
         "pages/order/main",
         "pages/mine/main",
-        "pages/checkPage/main",
-        "pages/propInformation/main"
+        "pages/verify/main",
+        "pages/info/main"
     ],
     "usingComponents": {
         "van-button": "vant-weapp/dist/button/index",

@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-17 13:20:43
+ * @LastEditTime: 2020-12-20 20:06:28
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -285,7 +285,7 @@ export default {
               this.$store.commit("changeLogin");
               this.isLogin = true;
               // 前往认证
-              const url = "../checkPage/main";
+              const url = "../verify/main";
               mpvue.navigateTo({ url });
             } else {
               console.log("获取失败");
@@ -323,7 +323,7 @@ export default {
               // wechat_nickname,wechat_avatar
               this.isLogin = true;
               // 未认证，前往认证页面
-              const url = "../checkPage/main";
+              const url = "../verify/main";
               mpvue.navigateTo({ url });
             } else {
               //  存储用户ID和用户类型

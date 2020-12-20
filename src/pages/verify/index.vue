@@ -42,7 +42,7 @@ export default {
   },
   methods: {
     changePage() {
-      let url = "../propInformation/main";
+      let url = "../info/main";
       mpvue.navigateTo({ url });
     },
     getValue(event) {
@@ -99,7 +99,7 @@ export default {
               title: res.data.message,
               icon: "none",
             });
-            let url = "../propInformation/main?phone=" + this.phoneNumber;
+            let url = "../info/main?phone=" + this.phoneNumber;
             mpvue.navigateTo({ url });
           }
         });
