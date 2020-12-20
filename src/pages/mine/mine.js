@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-15 14:07:29
- * @LastEditTime: 2020-12-20 20:49:31
+ * @LastEditTime: 2020-12-20 21:08:23
  * @FilePath: /mp-driver/src/pages/mine/mine.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -69,7 +69,27 @@ export default {
           icon: "none",
         });
       } else {
-        console.log(this.feedback);
+        this.$wxRequest
+          .post({
+            url: "/Dmobile/feedback",
+            data: {
+              userId: this.userID,
+              feedback: this.feedback,
+            },
+          })
+          .then((res) => {
+            if (res.data.code == "20001") {
+              wx.showToast({
+                title: res.data.message,
+                icon: "none",
+              });
+            } else if (res.data.code == "20000") {
+              wx.showToast({
+                title: res.data.message,
+                icon: "none",
+              });
+            }
+          });
       }
     },
   },
