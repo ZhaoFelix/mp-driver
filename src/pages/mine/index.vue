@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-21 10:13:59
+ * @LastEditTime: 2020-12-21 14:21:28
  * @FilePath: /mp-driver/src/pages/mine/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -41,7 +41,7 @@
         :title="item.title"
         link-type="navigateTo"
         :url="item.url"
-        @click="navigateClick(index)"
+        @click="cellClick(index)"
       />
     </div>
     <div class="version-info">v 1.0.0</div>
