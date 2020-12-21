@@ -2,11 +2,12 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-15 09:00:54
- * @LastEditTime: 2020-12-21 10:17:11
+ * @LastEditTime: 2020-12-21 14:44:52
  * @FilePath: /mp-driver/src/pages/order/order.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
 import { mapState } from "vuex";
+import { servicePhone } from "../../../config/options";
 export default {
   data() {
     return {
@@ -28,7 +29,7 @@ export default {
       // TODO:待添加客服电话
       console.log("联系客服");
       wx.makePhoneCall({
-        phoneNumber: "15300869767",
+        phoneNumber: servicePhone,
       });
     },
   },
@@ -54,7 +55,5 @@ export default {
         console.log("获取订单列表失败");
       });
   },
-  created() {
-    console.log("创建");
-  },
+  created() {},
 };
