@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-15 14:07:29
- * @LastEditTime: 2020-12-20 21:08:23
+ * @LastEditTime: 2020-12-21 10:15:10
  * @FilePath: /mp-driver/src/pages/mine/mine.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -35,13 +35,15 @@ export default {
   },
   methods: {
     fetchData() {
+      var _this = this;
       this.$wxRequest
         .get({
           url: "/Dmobile/user/info?userId=" + this.userID,
         })
         .then((res) => {
           if (res.data.code == 20000) {
-            this.driverInfo = res.data.data[0];
+            _this.driverInfo = res.data.data;
+            _this.driverInfo = [..._this.driverInfo];
           } else {
             console.log("获取司机信息失败");
           }

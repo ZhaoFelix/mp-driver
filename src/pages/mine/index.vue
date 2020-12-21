@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-20 20:48:14
+ * @LastEditTime: 2020-12-21 10:13:59
  * @FilePath: /mp-driver/src/pages/mine/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -27,9 +27,9 @@
     </div>
     <div class="user-identer">
       <van-cell-group v-if="isLogin" title="详细信息">
-        <van-cell title="司机姓名" :value="driverInfo.driver_name" />
-        <van-cell title="司机手机号" :value="driverInfo.driver_phone" />
-        <van-cell title="路线说明" :value="driverInfo.router_note" />
+        <van-cell title="司机姓名" :value="driverInfo[0].driver_name" />
+        <van-cell title="司机手机号" :value="driverInfo[0].driver_phone" />
+        <van-cell title="路线说明" :value="driverInfo[0].router_note" />
       </van-cell-group>
       <div v-else class="no-login">登录后获取信息</div>
     </div>
