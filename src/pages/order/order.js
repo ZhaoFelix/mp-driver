@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-15 09:00:54
- * @LastEditTime: 2020-12-21 14:44:52
+ * @LastEditTime: 2020-12-22 10:57:03
  * @FilePath: /mp-driver/src/pages/order/order.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -32,28 +32,33 @@ export default {
         phoneNumber: servicePhone,
       });
     },
+    fetchData() {
+      var _this = this;
+      this.$wxRequest
+        .get({
+          url: "/Dmobile/order/queryall?userId=" + this.userID,
+        })
+        .then((res) => {
+          if (res.data.code == "20000") {
+            _this.list = res.data.data;
+            _this.list = [..._this.list];
+          } else {
+            wx.showToast({
+              title: "数据获取失败",
+              icon: "none",
+            });
+          }
+        })
+        .catch((error) => {
+          console.log("获取订单列表失败");
+        });
+    },
   },
   mounted() {
-    var _this = this;
-    this.$wxRequest
-      .get({
-        url: "/Dmobile/order/queryall?userId=" + this.userID,
-      })
-      .then((res) => {
-        if (res.data.code == "20000") {
-          _this.list = res.data.data;
-          _this.list = [..._this.list];
-          console.log(_this.list);
-        } else {
-          wx.showToast({
-            title: "数据获取失败",
-            icon: "none",
-          });
-        }
-      })
-      .catch((error) => {
-        console.log("获取订单列表失败");
-      });
+    this.fetchData();
   },
-  created() {},
+  onShow() {
+    console.log("页面显示");
+    this.fetchData();
+  },
 };
