@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-13 19:29:28
- * @LastEditTime: 2020-12-15 14:04:42
+ * @LastEditTime: 2020-12-22 14:44:27
  * @FilePath: /mp-driver/src/store/store.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -16,8 +16,8 @@ export default new Vuex.Store({
     isLogin: false,
     userID: 0,
     userType: null,
-    avatar:"",
-    nickname:""
+    avatar: "",
+    nickname: "",
   },
   mutations: {
     setOpenID(state, v) {
@@ -26,17 +26,17 @@ export default new Vuex.Store({
     setUserID(state, v) {
       state.userID = v;
     },
-    changeLogin(state) {
-      state.isLogin = true;
+    changeLogin(state, v) {
+      state.isLogin = v;
     },
     setUserType(state, v) {
-      state.userType = v
+      state.userType = v;
     },
     setAvatar(state, v) {
-      state.avatar = v
+      state.avatar = v;
     },
     setNickname(state, v) {
-      state.nickname = v
+      state.nickname = v;
     },
   },
 });

@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-22 10:58:37
+ * @LastEditTime: 2020-12-22 16:16:52
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -27,37 +27,58 @@ export default {
     ...mapState(["isLogin", "openID", "userID"]),
     // TODO:定义过滤器替换重复内容
     place_date: function () {
-      return (this.orderInfo.user_place_order_time + "").slice(0, 10);
+      return (this.orderInfo.user_place_order_time == null
+        ? ""
+        : this.orderInfo.user_place_order_time + ""
+      ).slice(0, 10);
     },
     place_time: function () {
       return (this.orderInfo.user_place_order_time + "").slice(11, 19);
     },
     reach_date: function () {
-      return (this.orderInfo.driver_reach_time + "").slice(0, 10);
+      return (this.orderInfo.driver_reach_time == null
+        ? ""
+        : this.orderInfo.driver_reach_time + ""
+      ).slice(0, 10);
     },
     reach_time: function () {
       return (this.orderInfo.driver_reach_time + "").slice(11, 19);
     },
     get_date: function () {
-      return (this.orderInfo.driver_get_time + "").slice(0, 10);
+      return (this.orderInfo.driver_get_time == null
+        ? ""
+        : this.orderInfo.driver_get_time + ""
+      ).slice(0, 10);
     },
     get_time: function () {
       return (this.orderInfo.driver_get_time + "").slice(11, 19);
     },
     complete_date: function () {
-      return (this.orderInfo.driver_complete_time + "").slice(0, 10);
+      return (this.orderInfo.driver_complete_time == null
+        ? ""
+        : this.orderInfo.driver_complete_time + ""
+      ).slice(0, 10);
     },
     complete_time: function () {
       return (this.orderInfo.driver_complete_time + "").slice(11, 19);
     },
     // 计算前往目的地花费的时间
     goDesTimeGap() {
-      return this.timeGap(
-        this.orderInfo.driver_go_des,
-        this.orderInfo.driver_reach_des != null
-          ? this.orderInfo.driver_reach_des
-          : new Date()
-      );
+      return isNaN(
+        this.timeGap(
+          this.orderInfo.driver_go_des,
+          this.orderInfo.driver_reach_des != null
+            ? this.orderInfo.driver_reach_des
+            : new Date()
+        )
+      )
+        ? 0
+        : this.timeGap(
+            this.orderInfo.driver_go_des,
+            this.orderInfo.driver_reach_des != null
+              ? this.orderInfo.driver_reach_des
+              : new Date()
+          );
     },
     isShow() {
       if (
@@ -72,12 +93,21 @@ export default {
     },
     // 计算运输过程中的时间
     onGoingTimeGap() {
-      return this.timeGap(
-        this.orderInfo.driver_get_time,
-        this.orderInfo.driver_reach_trash != null
-          ? this.orderInfo.driver_reach_trash
-          : new Date()
-      );
+      return isNaN(
+        this.timeGap(
+          this.orderInfo.driver_get_time,
+          this.orderInfo.driver_reach_trash != null
+            ? this.orderInfo.driver_reach_trash
+            : new Date()
+        )
+      )
+        ? 0
+        : this.timeGap(
+            this.orderInfo.driver_get_time,
+            this.orderInfo.driver_reach_trash != null
+              ? this.orderInfo.driver_reach_trash
+              : new Date()
+          );
     },
     isReach() {
       return this.orderInfo.driver_reach_des !== null ? true : false;
@@ -305,7 +335,6 @@ export default {
         .then((res) => {
           if (res.data.code == 20000) {
             let dataArr = res.data.data;
-
             if (dataArr.length == 0) {
               return;
             }
@@ -317,11 +346,11 @@ export default {
               //  存储用户ID和用户类型
               this.$store.commit("setUserID", dataArr[0].user_id);
               this.$store.commit("setUserType", dataArr[0].user_type);
-              this.$store.commit("changeLogin");
+              this.$store.commit("changeLogin", true);
               this.$store.commit("setNickname", dataArr[0].wechat_nickname);
               this.$store.commit("setAvatar", dataArr[0].wechat_avatar);
-              // wechat_nickname,wechat_avatar
               this.isLogin = true;
+
               // 未认证，前往认证页面
               const url = "../verify/main";
               mpvue.navigateTo({ url });
@@ -329,7 +358,7 @@ export default {
               //  存储用户ID和用户类型
               this.$store.commit("setUserID", dataArr[0].user_id);
               this.$store.commit("setUserType", dataArr[0].user_type);
-              this.$store.commit("changeLogin");
+              this.$store.commit("changeLogin", true);
               this.$store.commit("setNickname", dataArr[0].wechat_nickname);
               this.$store.commit("setAvatar", dataArr[0].wechat_avatar);
               this.isLogin = true;
@@ -350,7 +379,14 @@ export default {
         })
         .then((res) => {
           if (res.data.code == 20000) {
-            _this.orderInfo = res.data.data[0];
+            if (res.data.data.length == 0) {
+              wx.showToast({
+                title: "暂无订单",
+                icon: "none",
+              });
+            } else {
+              _this.orderInfo = res.data.data[0];
+            }
           } else {
             console.log("查询失败");
           }
@@ -401,7 +437,6 @@ export default {
         });
     },
     afterReachRead(event) {
-      console.log("图片上传1");
       const { file } = event.mp.detail;
       let fileName = "ningjin_dev/" + new Date().getTime() + ".png";
       var _this = this;
@@ -533,7 +568,6 @@ export default {
           }
         });
     },
-
     // 订单完成
     afterCompleteRead(event) {
       console.log("图片上传");
@@ -579,7 +613,6 @@ export default {
       ];
     },
     completeOrder() {
-      let _this = this;
       this.$wxRequest
         .post({
           url: "/Dmobile/order/update/complete",
@@ -590,7 +623,12 @@ export default {
         })
         .then((res) => {
           if (res.data.code == 20000) {
-            _this.fetchData();
+            wx.showToast({
+              title: "订单已完成",
+              icon: "none",
+            });
+            this.isComplete = true;
+            this.fetchData();
           } else {
             console.log("更新失败");
           }
@@ -625,8 +663,5 @@ export default {
         }
       },
     });
-  },
-  onShow() {
-    this.fetchData();
   },
 };

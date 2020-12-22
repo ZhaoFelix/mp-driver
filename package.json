@@ -23,9 +23,9 @@
     "build": "node build/build.js wx"
   },
   "dependencies": {
-    "@vant/weapp": "^1.5.2",
+    "@vant/weapp": "^1.6.2",
     "mpvue": "^2.0.0",
-    "vuex": "^3.0.1"
+    "vuex": "^3.5.1"
   },
   "devDependencies": {
     "babel-core": "^6.22.1",

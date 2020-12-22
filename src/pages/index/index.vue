@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-17 13:18:07
+ * @LastEditTime: 2020-12-22 16:12:28
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -245,7 +245,9 @@
           <!-- left -->
           <van-col span="5">
             <van-row>
-              <div class="step-common">{{ reach_date }}</div>
+              <div class="step-common">
+                {{ reach_date }}
+              </div>
               <div class="step-common-1">{{ reach_time }}</div>
             </van-row>
             <van-row>
@@ -475,9 +477,27 @@
           </van-col>
         </van-row>
       </div>
+      <van-sticky class="refresh">
+        <img
+          class="refresh-img"
+          src="../../../static/images/1.png"
+          alt=""
+          @click="fetchData"
+        />
+      </van-sticky>
     </div>
     <div v-else>
-      <span></span>
+      <div class="no-login">
+        <span> 暂无订单 </span>
+      </div>
+      <van-sticky class="refresh">
+        <img
+          class="refresh-img"
+          src="../../../static/images/1.png"
+          alt=""
+          @click="fetchData"
+        />
+      </van-sticky>
     </div>
   </div>
 </template>

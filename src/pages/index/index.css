@@ -106,3 +106,14 @@ page {
   background-color: #d49968;
   color: white;
 }
+
+.refresh {
+  bottom: 10px;
+  position: absolute;
+  right: 10px;
+}
+
+.refresh-img {
+  width: 30px;
+  height: 30px;
+}
