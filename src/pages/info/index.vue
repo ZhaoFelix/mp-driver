@@ -2,8 +2,8 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:58:34
- * @LastEditTime: 2020-12-19 17:26:03
- * @FilePath: /mp-driver/src/pages/propInformation/index.vue
+ * @LastEditTime: 2021-01-04 08:55:17
+ * @FilePath: /mp-driver/src/pages/info/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
 <template>
@@ -28,12 +28,12 @@
           title="身份证号"
           :value="item.driver_card_id"
         />
-        <van-cell
+        <!-- <van-cell
           value-class="info"
           title-width="90px"
           title="路线类型"
           :value="item.router_note"
-        />
+        /> -->
       </van-cell-group>
     </div>
     <button class="changeButton" @click="changePages">确认</button>
