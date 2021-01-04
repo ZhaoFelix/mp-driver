@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-22 16:34:23
+ * @LastEditTime: 2021-01-04 09:19:47
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -477,28 +477,20 @@
           </van-col>
         </van-row>
       </div>
-      <van-sticky class="refresh">
-        <img
-          class="refresh-img"
-          src="../../../static/images/refresh.png"
-          alt=""
-          @click="fetchData"
-        />
-      </van-sticky>
     </div>
     <div v-else>
       <div class="no-login">
         <span> 暂无订单 </span>
       </div>
-      <van-sticky class="refresh">
-        <img
-          class="refresh-img"
-          src="../../../static/images/refresh.png"
-          alt=""
-          @click="fetchData"
-        />
-      </van-sticky>
     </div>
+    <van-sticky class="refresh">
+      <img
+        class="refresh-img"
+        src="../../../static/images/refresh.png"
+        alt=""
+        @click="fetchData"
+      />
+    </van-sticky>
   </div>
 </template>
 
