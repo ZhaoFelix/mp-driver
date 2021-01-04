@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-01-04 10:46:05
+ * @LastEditTime: 2021-01-04 11:00:33
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -279,6 +279,7 @@ export default {
     timeGap(startTimeStr, endTimeStr) {
       let endTime = new Date(endTimeStr);
       let startTime = new Date(startTimeStr);
+
       return Math.floor((endTime - startTime) / 1000 / 60 / 60) >= 1
         ? Math.floor((endTime - startTime) / 1000 / 60 / 60) +
             "小时" +
