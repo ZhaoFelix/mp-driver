@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-01-04 10:29:55
+ * @LastEditTime: 2021-01-04 10:46:05
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -395,22 +395,29 @@ export default {
         });
     },
     // 选择车牌号
-    confirmSelect() {
+    confirmSelect(event) {
+      let index = event.mp.detail.index;
+      let car_id = this.columns[index].id;
       let order_id = this.orderInfo.order_id;
       if (order_id != undefined) {
         this.$wxRequest
           .get({
-            url: "/Dmobile/order/update/status4?orderId=" + order_id,
+            url:
+              "/Dmobile/order/update/status4?orderId=" +
+              order_id +
+              "&carId=" +
+              car_id,
           })
           .then((res) => {
             if (res.data.code == 20000) {
+              this.isShowPopup = false;
               this.fetchData();
             } else {
             }
           });
       }
     },
-    cancleSelect() {
+    cancelSelect() {
       this.isShowPopup = false;
     },
     // 前往目的地
