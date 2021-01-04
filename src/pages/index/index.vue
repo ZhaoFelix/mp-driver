@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-01-04 11:01:04
+ * @LastEditTime: 2021-01-04 13:55:46
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -77,7 +77,7 @@
                 </van-col>
               </van-row>
               <!-- bottom -->
-              <van-row>
+              <!-- <van-row>
                 <van-col span="22">
                   <div class="step-6-imgs">
                     <van-row>
@@ -105,7 +105,7 @@
                     </van-row>
                   </div>
                 </van-col>
-              </van-row>
+              </van-row> -->
             </van-row>
           </van-col>
         </van-row>

@@ -79,7 +79,7 @@ page {
   background-color: rgba(0, 0, 0, 0.02);
   width: 2px;
   float: right;
-  height: 95px;
+  height: 30px;
 }
 .v-divider-1 {
   background-color: rgba(0, 0, 0, 0.02);
@@ -109,7 +109,7 @@ page {
 
 .refresh {
   bottom: 10px;
-  position: absolute;
+  position: fixed;
   right: 20px;
 }
 

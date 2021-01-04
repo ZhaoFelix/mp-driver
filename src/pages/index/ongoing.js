@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-01-04 11:00:33
+ * @LastEditTime: 2021-01-04 14:08:32
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -19,6 +19,7 @@ export default {
   data() {
     return {
       maxCount: 4,
+      limitNumber: 2,
       orderInfo: {},
       OSS,
       isShowPopup: false,
@@ -122,7 +123,7 @@ export default {
       ) {
         return true;
       } else if (this.orderInfo.driver_reach_img instanceof Array) {
-        return !(this.orderInfo.driver_reach_img.length == this.maxCount);
+        return !(this.orderInfo.driver_reach_img.length >= this.limitNumber);
       } else {
         return true;
       }
@@ -135,20 +136,23 @@ export default {
       ) {
         return true;
       } else if (this.orderInfo.driver_get_img instanceof Array) {
-        return !(this.orderInfo.driver_get_img.length == this.maxCount);
+        return !(this.orderInfo.driver_get_img.length >= this.limitNumber);
       } else {
         return true;
       }
     },
     isComplete() {
+      console.log(this.orderInfo.driver_complete_time == null);
       if (
-        this.orderInfo.driver_complete_img === null ||
-        this.orderInfo.driver_complete_img === undefined
+        this.orderInfo.driver_complete_time == null ||
+        this.orderInfo.driver_complete_time === undefined
       ) {
-        return true;
-      } else if (this.orderInfo.driver_complete_img instanceof Array) {
-        return !(this.orderInfo.driver_complete_img.length == this.maxCount);
-      } else {
+        return false;
+      }
+      // else if (this.orderInfo.driver_complete_img instanceof Array) {
+      //   return !(this.orderInfo.driver_complete_img.length >= this.limitNumber);
+      // }
+      else {
         return true;
       }
     },
@@ -279,7 +283,6 @@ export default {
     timeGap(startTimeStr, endTimeStr) {
       let endTime = new Date(endTimeStr);
       let startTime = new Date(startTimeStr);
-
       return Math.floor((endTime - startTime) / 1000 / 60 / 60) >= 1
         ? Math.floor((endTime - startTime) / 1000 / 60 / 60) +
             "小时" +
@@ -463,6 +466,7 @@ export default {
         });
     },
     afterReachRead(event) {
+      console.log("图片上传");
       const { file } = event.mp.detail;
       let fileName = "ningjin_dev/" + new Date().getTime() + ".png";
       var _this = this;
@@ -594,7 +598,9 @@ export default {
           }
         });
     },
+
     // 订单完成
+    /*
     afterCompleteRead(event) {
       console.log("图片上传");
       const { file } = event.mp.detail;
@@ -638,6 +644,7 @@ export default {
         ...this.orderInfo.driver_complete_img,
       ];
     },
+    */
     completeOrder() {
       this.$wxRequest
         .post({
@@ -654,6 +661,7 @@ export default {
               icon: "none",
             });
             this.isComplete = true;
+            this.orderInfo = {};
             this.fetchData();
           } else {
             console.log("更新失败");
