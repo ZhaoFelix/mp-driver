@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2020-12-22 16:16:52
+ * @LastEditTime: 2021-01-04 09:45:51
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -21,6 +21,8 @@ export default {
       maxCount: 4,
       orderInfo: {},
       OSS,
+      isShowPopup: true,
+      columns: ["杭州", "宁波", "温州", "嘉兴", "湖州"],
     };
   },
   computed: {

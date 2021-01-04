@@ -117,3 +117,13 @@ page {
   width: 30px;
   height: 30px;
 }
+
+.top-left {
+  float: left;
+  padding: 8px;
+}
+
+.top-right {
+  float: right;
+  padding: 8px;
+}

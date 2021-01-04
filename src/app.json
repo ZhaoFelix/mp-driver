@@ -19,7 +19,9 @@
         "van-dialog": "vant-weapp/dist/dialog/index",
         "van-field": "vant-weapp/dist/field/index",
         "van-cell-group": "vant-weapp/dist/cell-group/index",
-        "van-sticky": "vant-weapp/dist/sticky/index"
+        "van-sticky": "vant-weapp/dist/sticky/index",
+        "van-popup": "vant-weapp/dist/popup/index",
+        "van-picker": "vant-weapp/dist/picker/index"
     },
     "window": {
         "backgroundTextStyle": "light",
