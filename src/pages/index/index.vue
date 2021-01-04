@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-01-04 09:48:42
+ * @LastEditTime: 2021-01-04 10:31:20
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -501,7 +501,7 @@
       <van-picker
         show-toolbar
         :columns="columns"
-        default-index="2"
+        :default-index="columns.length / 2"
         title="选择车牌号"
         @cancle="cancleSelect"
         @confirm="confirmSelect"

@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-01-04 09:45:51
+ * @LastEditTime: 2021-01-04 10:29:55
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -21,8 +21,8 @@ export default {
       maxCount: 4,
       orderInfo: {},
       OSS,
-      isShowPopup: true,
-      columns: ["杭州", "宁波", "温州", "嘉兴", "湖州"],
+      isShowPopup: false,
+      columns: [],
     };
   },
   computed: {
@@ -394,8 +394,8 @@ export default {
           }
         });
     },
-    // 前往目的地
-    goDestination() {
+    // 选择车牌号
+    confirmSelect() {
       let order_id = this.orderInfo.order_id;
       if (order_id != undefined) {
         this.$wxRequest
@@ -409,6 +409,22 @@ export default {
             }
           });
       }
+    },
+    cancleSelect() {
+      this.isShowPopup = false;
+    },
+    // 前往目的地
+    goDestination() {
+      this.isShowPopup = true;
+      this.$wxRequest
+        .get({
+          url: "/Dmobile/driver/carnumber",
+        })
+        .then((res) => {
+          if (res.data.code == 20000) {
+            this.columns = res.data.data;
+          }
+        });
     },
     // 到达目的地
     reachDestination() {
