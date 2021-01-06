@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-01-06 10:44:46
+ * @LastEditTime: 2021-01-06 10:49:27
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -302,10 +302,12 @@ export default {
               this.$store.commit("setUserID", res.data.data[0].user_id);
               this.$store.commit("changeLogin");
               this.isLogin = true;
-              if (res.data.user_type != 2) {
+              if (res.data.data[0].user_type != 2) {
                 // 前往认证
                 const url = "../verify/main";
                 mpvue.navigateTo({ url });
+              } else {
+                this.getUserInfo();
               }
             } else {
               console.log("获取失败");
