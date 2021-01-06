@@ -118,7 +118,7 @@
           <van-col span="5">
             <van-row>
               <div class="step-common">已用时</div>
-              <div class="step-common-1">{{ onGoingTimeGap }}</div>
+              <div class="step-common-1">{{ onGoingTimeGap + "" }}</div>
             </van-row>
             <van-row>
               <div>&nbsp;</div>

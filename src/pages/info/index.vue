@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:58:34
- * @LastEditTime: 2021-01-04 08:55:17
+ * @LastEditTime: 2021-01-06 10:36:04
  * @FilePath: /mp-driver/src/pages/info/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -67,6 +67,7 @@ export default {
               title: "认证成功",
               icon: "none",
             });
+            this.$store.commit("changeLogin");
             //  认证成功，返回首页
             let url = "../index/main";
             mpvue.switchTab({ url });

@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-01-05 08:58:57
+ * @LastEditTime: 2021-01-06 10:44:46
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -67,21 +67,12 @@ export default {
     },
     // 计算前往目的地花费的时间
     goDesTimeGap() {
-      return isNaN(
-        this.timeGap(
-          this.orderInfo.driver_go_des,
-          this.orderInfo.driver_reach_des != null
-            ? this.orderInfo.driver_reach_des
-            : new Date()
-        )
-      )
-        ? 0
-        : this.timeGap(
-            this.orderInfo.driver_go_des,
-            this.orderInfo.driver_reach_des != null
-              ? this.orderInfo.driver_reach_des
-              : new Date()
-          );
+      return this.timeGap(
+        this.orderInfo.driver_go_des,
+        this.orderInfo.driver_reach_des != null
+          ? this.orderInfo.driver_reach_des
+          : new Date()
+      );
     },
     isShow() {
       if (
@@ -96,21 +87,12 @@ export default {
     },
     // 计算运输过程中的时间
     onGoingTimeGap() {
-      return isNaN(
-        this.timeGap(
-          this.orderInfo.driver_get_time,
-          this.orderInfo.driver_reach_trash != null
-            ? this.orderInfo.driver_reach_trash
-            : new Date()
-        )
-      )
-        ? 0
-        : this.timeGap(
-            this.orderInfo.driver_get_time,
-            this.orderInfo.driver_reach_trash != null
-              ? this.orderInfo.driver_reach_trash
-              : new Date()
-          );
+      return this.timeGap(
+        this.orderInfo.driver_get_time,
+        this.orderInfo.driver_reach_trash != null
+          ? this.orderInfo.driver_reach_trash
+          : new Date()
+      );
     },
     isReach() {
       return this.orderInfo.driver_reach_des !== null ? true : false;
@@ -320,9 +302,11 @@ export default {
               this.$store.commit("setUserID", res.data.data[0].user_id);
               this.$store.commit("changeLogin");
               this.isLogin = true;
-              // 前往认证
-              const url = "../verify/main";
-              mpvue.navigateTo({ url });
+              if (res.data.user_type != 2) {
+                // 前往认证
+                const url = "../verify/main";
+                mpvue.navigateTo({ url });
+              }
             } else {
               console.log("获取失败");
             }
