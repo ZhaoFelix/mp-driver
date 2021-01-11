@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-01-06 10:49:27
+ * @LastEditTime: 2021-01-11 09:19:17
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -300,8 +300,8 @@ export default {
           .then((res) => {
             if (res.data.code == 20000) {
               this.$store.commit("setUserID", res.data.data[0].user_id);
-              this.$store.commit("changeLogin");
-              this.isLogin = true;
+              // this.$store.commit("changeLogin");
+              // this.isLogin = true;
               if (res.data.data[0].user_type != 2) {
                 // 前往认证
                 const url = "../verify/main";
@@ -338,7 +338,7 @@ export default {
               //  存储用户ID和用户类型
               this.$store.commit("setUserID", dataArr[0].user_id);
               this.$store.commit("setUserType", dataArr[0].user_type);
-              this.$store.commit("changeLogin", true);
+              // this.$store.commit("changeLogin", true);
               this.$store.commit("setNickname", dataArr[0].wechat_nickname);
               this.$store.commit("setAvatar", dataArr[0].wechat_avatar);
               this.isLogin = true;
