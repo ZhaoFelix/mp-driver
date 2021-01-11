@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-01-11 09:19:17
+ * @LastEditTime: 2021-01-11 14:43:43
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -13,6 +13,7 @@ import {
   downloadUrl,
   processImage,
   previewImage,
+  bucket,
 } from "../../../config/options.js";
 let OSS = {};
 export default {
@@ -455,7 +456,7 @@ export default {
     afterReachRead(event) {
       console.log("图片上传");
       const { file } = event.mp.detail;
-      let fileName = "ningjin_dev/" + new Date().getTime() + ".png";
+      let fileName = bucket + new Date().getTime() + ".png";
       var _this = this;
       wx.uploadFile({
         url: uploadUrl, // 接口地址
@@ -514,7 +515,7 @@ export default {
     // 装车完成的函数
     afterGetRead(event) {
       const { file } = event.mp.detail;
-      let fileName = "ningjin_dev/" + new Date().getTime() + ".png";
+      let fileName = bucket + new Date().getTime() + ".png";
       var _this = this;
       wx.uploadFile({
         url: uploadUrl, // 接口地址
@@ -591,7 +592,7 @@ export default {
     afterCompleteRead(event) {
       console.log("图片上传");
       const { file } = event.mp.detail;
-      let fileName = "ningjin_dev/" + new Date().getTime() + ".png";
+      let fileName = bucket + new Date().getTime() + ".png";
       var _this = this;
       wx.uploadFile({
         url: uploadUrl, // 接口地址
