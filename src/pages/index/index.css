@@ -18,7 +18,7 @@ page {
   color: rgba(1, 1, 1, 0.5);
   padding: 6px 10px;
   border-top-left-radius: 20px;
-  border-top-right-radius: 10px;
+  border-top-right-radius: 20px;
 }
 
 .step-common {
@@ -62,6 +62,7 @@ page {
   border: 0;
 }
 
+/* 自定以按钮的不可点击样式 */
 button[disabled] {
   background-color: #d49968 !important;
   border: 0 !important;
