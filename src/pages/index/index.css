@@ -2,6 +2,7 @@ page {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
+
 .sub-container {
   width: 96%;
   background-color: white;
@@ -60,6 +61,13 @@ page {
   color: white;
   border: 0;
 }
+
+button[disabled] {
+  background-color: #d49968 !important;
+  border: 0 !important;
+  color: white !important;
+  opacity: 0.2 !important;
+}
 .step-6-imgs {
   background-color: rgba(0, 0, 0, 0.01);
   padding: 8px;
@@ -76,22 +84,22 @@ page {
 }
 
 .v-divider {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.2);
   width: 2px;
   float: right;
   height: 30px;
 }
 .v-divider-1 {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.2);
   width: 2px;
   float: right;
   height: 30px;
 }
 .v-divider-2 {
-  background-color: rgba(0, 0, 0, 0.02);
+  background-color: rgba(0, 0, 0, 0.2);
   width: 2px;
   float: right;
-  height: 115px;
+  height: 120px;
 }
 .no-login {
   margin-top: 70%;

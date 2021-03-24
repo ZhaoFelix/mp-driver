@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-01-05 09:02:30
+ * @LastEditTime: 2021-03-24 11:48:54
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -180,7 +180,7 @@
               </div>
             </van-row>
             <van-row>
-              <div class="v-divider">&nbsp;</div>
+              <div class="v-divider-2">&nbsp;</div>
             </van-row>
           </van-col>
           <!-- right -->
@@ -223,8 +223,9 @@
                         <div style="height: 8px"></div>
                         <van-uploader
                           :file-list="driverGetImages"
-                          :max-count="maxCount"
+                          :max-count=" isGetDeleted ? maxCount : driverGetImages.lenght"
                           preview-size="50"
+                          @beforeRead='beforeGetRead'
                           :deletable="isGetDeleted"
                           @afterRead="afterGetRead"
                           @delete="deleteGetImage"
@@ -308,7 +309,7 @@
                         <div style="height: 8px"></div>
                         <van-uploader
                           :file-list="driverReachImages"
-                          :max-count="maxCount"
+                          :max-count="isReachDeleted ? maxCount : driverReachImages.lenght"
                           preview-size="50"
                           :deletable="isReachDeleted"
                           @afterRead="afterReachRead"
@@ -383,7 +384,7 @@
                             <span>{{ orderInfo.order_user_name }}</span>
                           </van-col>
                           <van-col offset="2">
-                            <span>电话联系：</span>
+                            <span>联系电话：</span>
                             <span style="color: red">{{
                               orderInfo.user_phone
                             }}</span>
