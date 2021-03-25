@@ -2,12 +2,12 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-15 14:07:29
- * @LastEditTime: 2021-01-11 09:14:22
+ * @LastEditTime: 2021-03-25 14:45:13
  * @FilePath: /mp-driver/src/pages/mine/mine.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
 import { mapState } from "vuex";
-import { servicePhone } from "../../../config/options";
+import { servicePhone,VERSION } from "../../../config/options";
 export default {
   data() {
     return {
@@ -28,6 +28,7 @@ export default {
       driverInfo: [],
       isFeedback: false,
       feedback: null,
+      VERSION
     };
   },
   computed: {
