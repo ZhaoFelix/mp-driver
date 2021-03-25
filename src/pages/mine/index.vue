@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-03-25 14:45:36
+ * @LastEditTime: 2021-03-25 14:55:21
  * @FilePath: /mp-driver/src/pages/mine/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -44,7 +44,7 @@
         @click="onClick(index)"
       />
     </div>
-    <div class="version-info">{ VERSION }</div>
+    <div class="version-info">{{ VERSION }}</div>
     <van-dialog
       use-slot
       title="反馈内容"
