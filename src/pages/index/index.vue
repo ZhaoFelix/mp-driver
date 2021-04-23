@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-03-24 12:24:26
+ * @LastEditTime: 2021-04-23 14:23:46
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -456,11 +456,19 @@
                       <div class="limit-common">
                         {{ orderInfo.user_address }}
                       </div>
-                      <div class="step-common-title">建筑面积</div>
+                      <div class="step-common-title" v-if="orderInfo.order_type==1">装修面积</div>
+                      <div class="step-common-title" v-if="orderInfo.order_type==2">商业装修</div>
+                      <div class="step-common-title" v-if="orderInfo.order_type==3">垃圾箱数</div>
                       <div class="limit-common">
                         <van-row>
-                          <van-col span="5">
+                          <van-col span="5" v-if="orderInfo.order_type==1">
                             <span>{{ orderInfo.order_size + " m²" }}</span>
+                          </van-col>
+                           <!-- <van-col span="5" v-if="orderInfo.order_type==2">
+                            <span>{{ orderInfo.order_size + " m²" }}</span>
+                          </van-col> -->
+                           <van-col span="5" v-if="orderInfo.order_type==3">
+                            <span>{{ orderInfo.box_number + " 箱" }}</span>
                           </van-col>
                           <van-col>
                             <span>&nbsp;预约时间：</span>

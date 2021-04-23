@@ -9,6 +9,7 @@ page {
 }
 .custom-style {
   background-color: white;
+  padding: 4px 0;
 }
 .v-line {
   height: 20px;
