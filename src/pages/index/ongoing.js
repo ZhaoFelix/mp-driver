@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-03-24 11:36:13
+ * @LastEditTime: 2021-04-25 14:09:51
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -25,6 +25,7 @@ export default {
       OSS,
       isShowPopup: false,
       columns: [],
+      canUseGetUserProfile: false,
     };
   },
   computed: {
@@ -291,8 +292,34 @@ export default {
           province: userInfo.province,
           country: userInfo.country,
         };
-        this.$store.commit("setNickname", userInfo.nickName);
-        this.$store.commit("setAvatar", userInfo.avatarUrl);
+        this.addUserInfoToDB(data, id);
+      } else {
+        console.log("用户点击了拒绝按钮");
+      }
+    },
+    getUserProfile(e,id) {
+      wx.getUserProfile({
+        desc: "用于完善会员资料", // 声明获取用户个人信息后的用途，后续会展示在弹窗中，请谨慎填写
+        success: (res) => {
+          let { userInfo } = res;
+          let data = {
+            user_type: id,
+            openId: this.openID,
+            avatarUrl: userInfo.avatarUrl,
+            gender: userInfo.gender,
+            nickName: userInfo.nickName,
+            province: userInfo.province,
+            country: userInfo.country,
+          };
+          this.addUserInfoToDB(data, id);
+        },
+        fail: (error) => {},
+      });
+    },
+      // 将用户信息写入数据库
+      addUserInfoToDB(data) {
+        this.$store.commit("setNickname", data.nickName);
+        this.$store.commit("setAvatar", data.avatarUrl);
         this.$wxRequest
           .post({
             url: "/Dmobile/wxauth/wechat",
@@ -314,10 +341,7 @@ export default {
               console.log("获取失败");
             }
           });
-      } else {
-        console.log("用户点击了拒绝按钮");
-      }
-    },
+      },
     getUserInfo() {
       this.openID = this.$store.state.openID;
       this.$wxRequest
@@ -363,6 +387,7 @@ export default {
           }
         });
     },
+   
     // 获取实时订单
     fetchData() {
       var _this = this;
@@ -659,6 +684,9 @@ export default {
   },
   mounted() {
     var _this = this;
+    if (wx.getUserProfile) {
+      this.canUseGetUserProfile = true;
+    }
     // 登录获取openID
     wx.login({
       success(res) {

@@ -8,10 +8,11 @@ page {
   height: 100%;
 }
 .user-info {
-  height: 70px;
+  height: 60px;
   width: 100%;
   margin-top: 15px;
   background-color: white;
+  padding: 5px 0px;
 }
 .user-identer {
   height: 128px;
@@ -29,7 +30,10 @@ page {
 .user-nickname {
   margin-top: 5px;
   height: 30px;
-  line-height: 60px;
+}
+.user-type {
+  font-size: 13px;
+  color: rgba(1, 1, 1, 0.5);
 }
 .wechat {
   height: 30px;
