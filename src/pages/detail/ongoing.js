@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-05-12 10:04:37
+ * @LastEditTime: 2021-05-12 14:10:42
  * @FilePath: /mp-driver/src/pages/detail/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -276,6 +276,24 @@ export default {
     }
     
   },
+  watch: {
+    isShowPopup: function (newVal,oldVal) {
+      if (newVal) {
+        this.$wxRequest
+        .get({
+          url: "/Dmobile/driver/carnumber",
+        })
+        .then((res) => {
+          if (res.data.code == 20000) {
+            this.columns  = res.data.data;
+            this.columns = [...this.columns]
+            
+            console.log(this.columns)
+          }
+        });
+      }
+    }
+  },
   methods: {
     timeGap(startTimeStr, endTimeStr) {
       let endTime = new Date(endTimeStr);
@@ -460,15 +478,6 @@ export default {
     // 前往目的地
     goDestination() {
       this.isShowPopup = true;
-      this.$wxRequest
-        .get({
-          url: "/Dmobile/driver/carnumber",
-        })
-        .then((res) => {
-          if (res.data.code == 20000) {
-            this.columns = res.data.data;
-          }
-        });
     },
     // 到达目的地
     reachDestination() {
@@ -707,6 +716,7 @@ export default {
     this.orderId = params.orderId;
     if (this.orderId != 0) {
       this.fetchData()
+      this.getOssToken()
     }
     // var _this = this;
     // if (wx.getUserProfile) {
