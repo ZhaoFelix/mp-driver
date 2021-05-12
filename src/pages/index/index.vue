@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-05-12 08:27:57
+ * @LastEditTime: 2021-05-12 10:16:59
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -22,7 +22,7 @@
         <!-- 高版本库 -->
         <button
         v-else
-          open-type="getUserInfo"
+         
           class="login-btn"
           @click="getUserProfile($event)"
         >

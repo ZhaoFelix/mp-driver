@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-15 09:00:54
- * @LastEditTime: 2021-05-12 10:04:50
+ * @LastEditTime: 2021-05-12 10:18:45
  * @FilePath: /mp-driver/src/pages/index/order.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -13,6 +13,7 @@ export default {
     return {
       // active: 0,
       list: [],
+      canUseGetUserProfile: false,
     };
   },
   computed: {
