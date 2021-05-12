@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-04-25 14:09:51
+ * @LastEditTime: 2021-04-28 09:37:54
  * @FilePath: /mp-driver/src/pages/index/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -29,7 +29,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isLogin", "openID", "userID"]),
+    ...mapState(["isLogin", "openID", "userID","userType"]),
     // TODO:定义过滤器替换重复内容
     place_date: function () {
       return (this.orderInfo.user_place_order_time == null
@@ -413,6 +413,7 @@ export default {
     },
     // 选择车牌号
     confirmSelect(event) {
+      console.log(this.columns[0]);
       let index = event.mp.detail.index;
       let car_id = this.columns[index].id;
       let order_id = this.orderInfo.order_id;
@@ -435,6 +436,7 @@ export default {
       }
     },
     cancelSelect() {
+      console.log('测试')
       this.isShowPopup = false;
     },
     // 前往目的地

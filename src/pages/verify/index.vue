@@ -79,7 +79,7 @@ export default {
         return;
       }
       let _this = this;
-      console.log(this.phoneNumber);
+      
       this.$wxRequest
         .post({
           url: "/public/Dverify/checked",
@@ -99,6 +99,7 @@ export default {
               title: res.data.message,
               icon: "none",
             });
+             
             let url = "../info/main?phone=" + this.phoneNumber;
             mpvue.navigateTo({ url });
           }

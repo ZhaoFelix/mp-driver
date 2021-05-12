@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2020-12-15 14:08:25
+ * @LastEditTime: 2021-04-28 09:49:44
  * @FilePath: /mp-driver/src/pages/order/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -50,10 +50,20 @@
             <van-col offset="1" span="9">
               <span class="address-title">订单地区、街道</span>
             </van-col>
-            <van-col offset="4" span="8" v-if="item.order_status != 0">
+            <van-col offset="4" span="8" v-if="item.order_type  == 1 ">
               <span class="price-title">装修面积：</span>
               <span class="price">{{ item.order_size }}</span>
               <span class="price-end"> 平方米</span>
+            </van-col>
+              <van-col offset="4" span="8" v-else-if="item.order_type  == 2 ">
+              <span class="price-title">商业装修</span>
+              <!-- <span class="price">{{ item.order_size }}</span>
+              <span class="price-end"> 平方米</span> -->
+            </van-col>
+              <van-col offset="4" span="8" v-else-if="item.order_type  == 3 ">
+              <span class="price-title">垃圾箱数量：</span>
+              <span class="price">{{ item.box_number }}</span>
+              <span class="price-end"> 箱</span>
             </van-col>
           </van-row>
           <van-row>
@@ -65,7 +75,7 @@
         <van-row>
           <van-col offset="1">
             <span class="time-title">预约时间：</span>
-            <span class="time">{{ item.user_reserve_time }}</span>
+            <span class="time">{{ item.reserve_time }}</span>
           </van-col>
         </van-row>
         <!-- 底部 -->

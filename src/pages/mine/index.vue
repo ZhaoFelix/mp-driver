@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-04-25 14:13:18
+ * @LastEditTime: 2021-04-25 14:48:06
  * @FilePath: /mp-driver/src/pages/mine/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -23,7 +23,7 @@
         <van-col span="16">
           <div class="user-nickname">{{ isLogin ? nickname : "未登录" }}</div>
            <div class="user-type">
-            {{ userType == 2 ? "物业经理人" : "普通用户" }}
+            {{ userType == 2 ? "注册司机" : "普通用户" }}
           </div>
         </van-col>
       </van-row>

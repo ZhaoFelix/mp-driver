@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-15 14:07:29
- * @LastEditTime: 2021-03-25 14:45:13
+ * @LastEditTime: 2021-04-25 14:42:20
  * @FilePath: /mp-driver/src/pages/mine/mine.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -32,7 +32,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isLogin", "openID", "userID", "avatar", "nickname"]),
+    ...mapState(["isLogin", "openID", "userID", "avatar", "nickname","userType"]),
   },
   methods: {
     fetchData() {
