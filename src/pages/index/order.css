@@ -133,3 +133,10 @@ button::after {
   width: 30px;
   height: 30px;
 }
+
+
+.more-info {
+  color:red;
+  font-size: 14px;
+  text-decoration: underline;
+}

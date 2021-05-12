@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-05-12 08:20:21
+ * @LastEditTime: 2021-05-12 08:27:57
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -96,24 +96,12 @@
           </van-row>
         </van-row>
         <van-row>
-          <van-col offset="1">
+          <van-col span="18" offset="1" >
             <span class="time-title">预约时间：</span>
             <span class="time">{{ item.reserve_time }}</span>
           </van-col>
-        </van-row>
-        <!-- 底部 -->
-        <van-row>
-          <van-col offset="1" span="16"   >
-            <div class="driver-info" v-if="item.order_status == '6'">
-              {{
-                "&nbsp;&nbsp;完成时间：" +
-                item.driver_reach_trash +
-                "&nbsp;&nbsp;"
-              }}
-            </div>
-          </van-col>
-          <van-col offset='1' span="4">
-            <span>详情</span>
+          <van-col span="3" offset='1'>
+            <span class="more-info" @click="moreInfo(item.order_id)">详情</span>
           </van-col>
         </van-row>
       </div>
