@@ -5,7 +5,9 @@
         "pages/mine/main",
         "pages/verify/main",
         "pages/info/main",
-        "pages/protocol/main"
+        "pages/protocol/main",
+        "pages/detail/main"
+
     ],
     "usingComponents": {
         "van-button": "vant-weapp/dist/button/index",

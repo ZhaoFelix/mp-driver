@@ -2,8 +2,8 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-11 09:17:51
- * @LastEditTime: 2021-04-28 09:37:54
- * @FilePath: /mp-driver/src/pages/index/ongoing.js
+ * @LastEditTime: 2021-05-12 09:52:26
+ * @FilePath: /mp-driver/src/pages/detail/ongoing.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
 
@@ -26,6 +26,8 @@ export default {
       isShowPopup: false,
       columns: [],
       canUseGetUserProfile: false,
+      orderId:0,
+      
     };
   },
   computed: {
@@ -258,10 +260,21 @@ export default {
         return this.orderInfo.driver_complete_img;
       }
     },
-
     isReachTrashDes() {
       return this.orderInfo.driver_reach_trash == null ? false : true;
     },
+    userPlaceOrderImages() {
+      if (this.orderInfo.user_place_order_img != null) {
+        if (this.orderInfo.user_place_order_img instanceof Array) {
+          return this.orderInfo.user_place_order_img;
+        } else {
+          return JSON.parse(this.orderInfo.user_place_order_img);
+        }
+      } else {
+        return this.orderInfo.user_place_order_img;
+      }
+    }
+    
   },
   methods: {
     timeGap(startTimeStr, endTimeStr) {
@@ -391,9 +404,11 @@ export default {
     // 获取实时订单
     fetchData() {
       var _this = this;
+      // TODO:用户ID写死
       this.$wxRequest
         .get({
-          url: "/Dmobile/order/query?userId=" + this.userID,
+          // url: "/Dmobile/order/query?userId=" + this.userID + '&orderId='+this.orderId,
+          url: "/Dmobile/order/query?userId=315" + '&orderId='+this.orderId,
         })
         .then((res) => {
           if (res.data.code == 20000) {
@@ -403,7 +418,10 @@ export default {
                 icon: "none",
               });
             } else {
+              console.log("测试")
               _this.orderInfo = res.data.data[0];
+              _this.userPlaceOrderImages = _this.orderInfo.user_place_order_img
+              console.log(_this.userPlaceOrderImages)
               // _this.orderInfo = [..._this.orderInfo];
             }
           } else {
@@ -685,35 +703,40 @@ export default {
     },
   },
   mounted() {
-    var _this = this;
-    if (wx.getUserProfile) {
-      this.canUseGetUserProfile = true;
+    let params = this.$root.$mp.query;
+    this.orderId = params.orderId;
+    if (this.orderId != 0) {
+      this.fetchData()
     }
-    // 登录获取openID
-    wx.login({
-      success(res) {
-        // console.log(res);
-        if (res.code) {
-          // console.log(res);
-          _this.$wxRequest
-            .post({
-              url: "/Dmobile/wxauth/wxauth",
-              data: {
-                code: res.code,
-              },
-            })
-            .then((res) => {
-              if (res.data.code == 20000) {
-                _this.$store.commit("setOpenID", res.data.data.openid);
-                //根据openID判断用户是否是首次使用小程序
-                _this.getUserInfo();
-                _this.getOssToken();
-              } else {
-                console.log("获取openId失败");
-              }
-            });
-        }
-      },
-    });
+    // var _this = this;
+    // if (wx.getUserProfile) {
+    //   this.canUseGetUserProfile = true;
+    // }
+    // // 登录获取openID
+    // wx.login({
+    //   success(res) {
+    //     // console.log(res);
+    //     if (res.code) {
+    //       // console.log(res);
+    //       _this.$wxRequest
+    //         .post({
+    //           url: "/Dmobile/wxauth/wxauth",
+    //           data: {
+    //             code: res.code,
+    //           },
+    //         })
+    //         .then((res) => {
+    //           if (res.data.code == 20000) {
+    //             _this.$store.commit("setOpenID", res.data.data.openid);
+    //             //根据openID判断用户是否是首次使用小程序
+    //             _this.getUserInfo();
+    //             _this.getOssToken();
+    //           } else {
+    //             console.log("获取openId失败");
+    //           }
+    //         });
+    //     }
+    //   },
+    // });
   },
 };

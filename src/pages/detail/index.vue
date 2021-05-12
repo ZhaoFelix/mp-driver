@@ -2,8 +2,8 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-04-28 09:54:48
- * @FilePath: /mp-driver/src/pages/index/index.vue
+ * @LastEditTime: 2021-05-12 09:57:59
+ * @FilePath: /mp-driver/src/pages/detail/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
 <template>
@@ -494,6 +494,18 @@
                           </van-col>
                         </van-row>
                       </div>
+                    </van-row>
+                    <van-row>
+                      <div class="step-common-title">现场图片</div>
+                        <van-col span="22" offset="1">
+                        <div style="height: 8px"></div>
+                        <van-uploader
+                          :file-list="userPlaceOrderImages"
+                          preview-size="60"
+                          :show-upload = "false"
+                          :deletable = "false"
+                        />
+                      </van-col>
                     </van-row>
                   </div>
                 </van-col>
