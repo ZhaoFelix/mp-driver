@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-15 09:00:54
- * @LastEditTime: 2021-05-12 08:57:36
+ * @LastEditTime: 2021-05-12 10:04:50
  * @FilePath: /mp-driver/src/pages/index/order.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -152,8 +152,8 @@ export default {
       // TODO:测试ID写死
       this.$wxRequest
         .get({
-          // url: "/Dmobile/order/queryall?userId=" + this.userID,
-          url: "/Dmobile/order/query/ongoing?userId=315"
+          url: "/Dmobile/order/queryall?userId=" + this.userID,
+          // url: "/Dmobile/order/query/ongoing?userId=315"
         })
         .then((res) => {
           if (res.data.code == "20000") {
