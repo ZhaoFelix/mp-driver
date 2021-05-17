@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-05-17 14:06:42
+ * @LastEditTime: 2021-05-17 20:25:52
  * @FilePath: /mp-driver/src/pages/detail/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -419,7 +419,7 @@
               </div>
             </van-row>
             <van-row>
-              <div class="v-divider-2" :style="orderInfo.order_type == 11 ? 'height:180px' : 'height:210px'">&nbsp;</div>
+              <div class="v-divider-2" :style="orderInfo.order_type == 11 ? 'height:192px' : 'height:210px'">&nbsp;</div>
             </van-row>
           </van-col>
           <!-- right -->
@@ -467,7 +467,7 @@
                             <span>{{ orderInfo.box_number + " 箱" }}</span>
                           </van-col>
                           <van-col>
-                            <span>&nbsp;预约时间：</span>
+                            <span style="font-weight:bold;">&nbsp;预约时间：</span>
                             <span style="color: red;font-weight:bold">{{
                               orderInfo.reserve_time
                             }}</span>
