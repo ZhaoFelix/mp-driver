@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-05-12 10:16:59
+ * @LastEditTime: 2021-05-17 13:50:03
  * @FilePath: /mp-driver/src/pages/index/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -44,7 +44,7 @@
           </van-col>
           <van-col span="16">
             <div class="order-number common">
-              {{ "订单编号：" + item.order_number }}
+              {{ "订单号：" + item.order_number }}
             </div>
           </van-col>
           <van-col offset="1" span="4">
@@ -88,10 +88,13 @@
               <span class="price">{{ item.box_number }}</span>
               <span class="price-end"> 箱</span>
             </van-col>
+             <van-col offset="4" span="8" v-else-if="item.order_type  == 11 ">
+                <span class="price-title">二次清运</span>
+             </van-col>
           </van-row>
           <van-row>
             <van-col offset="1">
-              <span class="common">{{ item.user_address }}</span>
+              <span class="common">{{ item.user_address + "("+ item.estate_plot +")" }}</span>
             </van-col>
           </van-row>
         </van-row>

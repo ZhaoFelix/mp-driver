@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-15 14:07:29
- * @LastEditTime: 2021-04-25 14:42:20
+ * @LastEditTime: 2021-05-17 14:08:50
  * @FilePath: /mp-driver/src/pages/mine/mine.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -12,10 +12,10 @@ export default {
   data() {
     return {
       tableList: [
-        {
-          title: "服务协议",
-          url: "",
-        },
+        // {
+        //   title: "服务协议",
+        //   url: "",
+        // },
         {
           title: "意见反馈",
           url: "",

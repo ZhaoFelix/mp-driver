@@ -2,35 +2,13 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-05-12 13:29:10
+ * @LastEditTime: 2021-05-17 14:06:42
  * @FilePath: /mp-driver/src/pages/detail/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
 <template>
   <div class="main-container">
-    <div v-if="!isLogin">
-      <div class="no-login">
-        <span> 登录后获取订单信息 </span>
-        <button
-        v-if="!canUseGetUserProfile"
-          open-type="getUserInfo"
-          class="login-btn"
-          @getuserinfo="bindGetUserInfo($event)"
-        >
-          登录
-        </button>
-        <!-- 高版本库 -->
-        <button
-        v-else
-          open-type="getUserInfo"
-          class="login-btn"
-          @click="getUserProfile($event)"
-        >
-          登录
-        </button>
-      </div>
-    </div>
-    <div class="sub-container" v-else-if="isShow">
+    <div class="sub-container" v-if="isShow">
       <!-- 订单号 -->
       <div class="order-number">
         <span>订单号 </span>
@@ -392,7 +370,9 @@
                   <div class="step-6-imgs">
                     <van-row>
                       <div class="step-common-title">订单地址区、街道</div>
-                      <div class="limit-common">上海市奉贤区奉浦大道123号</div>
+                     <div class="limit-common">
+                        {{ orderInfo.user_address }}
+                      </div>
                       <div class="step-common-title">联系人</div>
                       <div class="limit-common">
                         <van-row>
@@ -401,7 +381,7 @@
                           </van-col>
                           <van-col offset="2">
                             <span>联系电话：</span>
-                            <span style="color: red">{{
+                            <span style="color: red;font-weight:bold">{{
                               orderInfo.user_phone
                             }}</span>
                           </van-col>
@@ -439,7 +419,7 @@
               </div>
             </van-row>
             <van-row>
-              <div class="v-divider-2">&nbsp;</div>
+              <div class="v-divider-2" :style="orderInfo.order_type == 11 ? 'height:180px' : 'height:210px'">&nbsp;</div>
             </van-row>
           </van-col>
           <!-- right -->
@@ -488,7 +468,7 @@
                           </van-col>
                           <van-col>
                             <span>&nbsp;预约时间：</span>
-                            <span style="color: red">{{
+                            <span style="color: red;font-weight:bold">{{
                               orderInfo.reserve_time
                             }}</span>
                           </van-col>

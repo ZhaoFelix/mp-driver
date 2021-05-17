@@ -85,22 +85,25 @@ button[disabled] {
 }
 
 .v-divider {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   width: 2px;
   float: right;
   height: 30px;
+  margin-right: 2px;
 }
 .v-divider-1 {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   width: 2px;
   float: right;
   height: 30px;
+  margin-right: 2px;
 }
 .v-divider-2 {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   width: 2px;
   float: right;
   height: 120px;
+  margin-right: 2px;
 }
 .no-login {
   margin-top: 70%;
