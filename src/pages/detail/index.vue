@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-01 07:57:47
- * @LastEditTime: 2021-05-17 20:25:52
+ * @LastEditTime: 2021-05-18 08:57:36
  * @FilePath: /mp-driver/src/pages/detail/index.vue
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
 -->
@@ -371,7 +371,7 @@
                     <van-row>
                       <div class="step-common-title">订单地址区、街道</div>
                      <div class="limit-common">
-                        {{ orderInfo.user_address }}
+                        {{ orderInfo.user_address + "("+orderInfo.estate_plot+")" }}
                       </div>
                       <div class="step-common-title">联系人</div>
                       <div class="limit-common">
@@ -380,7 +380,7 @@
                             <span>{{ orderInfo.order_user_name }}</span>
                           </van-col>
                           <van-col offset="2">
-                            <span>联系电话：</span>
+                            <span style="font-weight:bold">联系电话：</span>
                             <span style="color: red;font-weight:bold">{{
                               orderInfo.user_phone
                             }}</span>
@@ -450,7 +450,7 @@
                     <van-row>
                       <div class="step-common-title">订单地址区、街道</div>
                       <div class="limit-common">
-                        {{ orderInfo.user_address }}
+                        {{ orderInfo.user_address + "("+orderInfo.estate_plot+")" }}
                       </div>
                       <div class="step-common-title" v-if="orderInfo.order_type==1">装修面积</div>
                       <div class="step-common-title" v-if="orderInfo.order_type==2">商业装修</div>
