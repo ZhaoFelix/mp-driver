@@ -7,6 +7,14 @@ page {
   background-color: rgba(0, 0, 0, 0.01);
   position: absolute;
 }
+.noOrder {
+  height: 200px;
+  width: 100%;
+  padding-top: 100px;
+  text-align: center;
+  color: rgba(1, 1, 1, 0.6);
+  font-size: 14px;
+}
 .custom-style {
   background-color: white;
   padding: 4px 0;

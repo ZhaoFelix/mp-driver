@@ -2,7 +2,7 @@
  * @Author: Felix
  * @Email: felix@qingmaoedu.com
  * @Date: 2020-12-15 09:00:54
- * @LastEditTime: 2020-12-22 10:57:03
+ * @LastEditTime: 2021-06-03 19:12:52
  * @FilePath: /mp-driver/src/pages/order/order.js
  * @Copyright © 2019 Shanghai Qingmao Network Technology Co.,Ltd All rights reserved.
  */
@@ -13,6 +13,7 @@ export default {
     return {
       // active: 0,
       list: [],
+      active: "1",
     };
   },
   computed: {
@@ -36,7 +37,8 @@ export default {
       var _this = this;
       this.$wxRequest
         .get({
-          url: "/Dmobile/order/queryall?userId=" + this.userID,
+          // url: "/Dmobile/order/queryall?userId=" + this.userID+"&type="+this.active,
+          url: "/Dmobile/order/queryall?userId=315&type="+this.active,
         })
         .then((res) => {
           if (res.data.code == "20000") {
@@ -52,6 +54,11 @@ export default {
         .catch((error) => {
           console.log("获取订单列表失败");
         });
+    },
+    onChangeTab(event) {
+      console.log(event.mp.detail);
+      this.active = event.mp.detail.name;
+      this.fetchData();
     },
   },
   mounted() {
